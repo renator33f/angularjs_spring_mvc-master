@@ -20,14 +20,26 @@ public class Fornecedor {
 	private String razaoSocial;
 
 	private String nomeFantasia;
+	
+	private String nomeAbrev;
 
 	private String endereco;
+	
+	private String bairro;
+	
+	private String cep;
 
 	private String cnpj;
 
 	private Long inscricaoEstadual;
 	
-	private String telefone;
+	private String telefone1;
+	
+	private String telefone2;
+	
+	private String fax;
+	
+	private String email;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@ForeignKey(name = "estados_fk")
@@ -42,14 +54,6 @@ public class Fornecedor {
 	
 	private Boolean ativo;
 	
-	
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-	
-	public String getTelefone() {
-		return telefone;
-	}
 	
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
@@ -131,6 +135,63 @@ public class Fornecedor {
 		this.foto = foto;
 	}
 
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getTelefone1() {
+		return telefone1;
+	}
+
+	public void setTelefone1(String telefone1) {
+		this.telefone1 = telefone1;
+	}
+
+	public String getTelefone2() {
+		return telefone2;
+	}
+
+	public void setTelefone2(String telefone2) {
+		this.telefone2 = telefone2;
+	}
+
+	public String getFax() {
+		return fax;
+	}
+
+	public void setFax(String fax) {
+		this.fax = fax;
+	}
+	
+	public String getNomeAbrev() {
+		return nomeAbrev;
+	}
+
+	public void setNomeAbrev(String nomeAbrev) {
+		this.nomeAbrev = nomeAbrev;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -155,5 +216,6 @@ public class Fornecedor {
 			return false;
 		return true;
 	}
+
 
 }

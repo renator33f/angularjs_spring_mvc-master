@@ -30,20 +30,27 @@ public class Cliente implements Serializable {
 
 	private String endereco;
 
-	private String telefone;
+	private String bairro;
+	
+	private String cep;
+	
+	private String telefone_fixo;
+	
+	private String telefone_celular;
 
 	private String sexo; 
 	
 	private Boolean ativo;
 	
-	private String interesse;
+	private String rg;
 	
 	private String cpf;
+	
+	private String email;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@ForeignKey(name="estados_fk")
 	private Estados estados = new Estados();
-	
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@ForeignKey(name="cidades_fk")
@@ -85,14 +92,7 @@ public class Cliente implements Serializable {
 	public Estados getEstados() {
 		return estados;
 	}
-	
-	public void setInteresse(String interesse) {
-		this.interesse = interesse;
-	}
-	
-	public String getInteresse() {
-		return interesse;
-	}
+
 	
 	public void setAtivo(Boolean ativo) {
 		if (ativo == null) 
@@ -136,14 +136,55 @@ public class Cliente implements Serializable {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-
-	public String getTelefone() {
-		return telefone;
+	
+	public String getBairro() {
+		return bairro;
 	}
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
 	}
+
+	public String getTelefone_fixo() {
+		return telefone_fixo;
+	}
+
+	public void setTelefone_fixo(String telefone_fixo) {
+		this.telefone_fixo = telefone_fixo;
+	}
+
+	public String getTelefone_celular() {
+		return telefone_celular;
+	}
+
+	public void setTelefone_celular(String telefone_celular) {
+		this.telefone_celular = telefone_celular;
+	}
+
+	public String getRg() {
+		return rg;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+	
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 
 	@Override
 	public int hashCode() {

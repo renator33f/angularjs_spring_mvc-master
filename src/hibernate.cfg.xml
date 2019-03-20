@@ -30,6 +30,9 @@
 		<mapping class="rslojavirtual.model.Livro" />
 		<mapping class="rslojavirtual.model.Pedido" />
 		<mapping class="rslojavirtual.model.ItemPedido" />
+		<mapping class="rslojavirtual.model.Cor" />
+		<mapping class="rslojavirtual.model.Tamanho" />
+		<mapping class="rslojavirtual.model.Marca" />
 		
 		
 	</session-factory>

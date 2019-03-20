@@ -36,8 +36,7 @@ app.config(function($routeProvider) {
 				controller : "fornecedorController",
 				templateUrl : "fornecedor/cadastro.html"
 			})// novo
-			
-			
+				
 			//--------------Livro---------------------
 				$routeProvider.when("/livrolist", {
 				controller : "livroController",
@@ -52,6 +51,38 @@ app.config(function($routeProvider) {
 			.when("/livro/cadastro", {
 				controller : "livroController",
 				templateUrl : "livro/cadastro.html"
+			})// novo
+
+			//--------------Cor---------------------
+			$routeProvider.when("/corlist", {
+				controller : "corController",
+				templateUrl : "cor/list.html"
+			})// listar
+			
+			.when("/coredit/:id", {
+				controller : "corController",
+				templateUrl : "cor/cadastro.html"
+			})// editar
+			
+			.when("/cor/cadastro", {
+				controller : "corController",
+				templateUrl : "cor/cadastro.html"
+			})// novo
+			
+			//--------------Tamanho---------------------
+			$routeProvider.when("/tamanholist", {
+				controller : "tamanhoController",
+				templateUrl : "tamanho/list.html"
+			})// listar
+			
+			.when("/tamanhoedit/:id", {
+				controller : "tamanhoController",
+				templateUrl : "tamanho/cadastro.html"
+			})// editar
+			
+			.when("/tamanho/cadastro", {
+				controller : "tamanhoController",
+				templateUrl : "tamanho/cadastro.html"
 			})// novo
 			
 			//----------------LOJA---------------
@@ -341,6 +372,314 @@ app.controller('clienteController', function($scope, $http, $location, $routePar
 	};
 	
 });
+
+
+
+
+
+//configurações do controller de cores
+app.controller('corController', function($scope, $http, $location, $routeParams) {
+	
+	if ($routeParams.id != null && $routeParams.id != undefined
+			&& $routeParams.id != ''){// se estiver editando a cor
+		// entra pra editar
+		$http.get("cor/buscarcor/" + $routeParams.id).success(function(response) {
+			$scope.cor = response;
+			
+			document.getElementById("codCor").src = $scope.cor.id;
+			//------------------ carrega estados e cidades do cliente em edição
+			setTimeout(function () {
+							
+			}, 1000);
+			//----------------------
+			
+		}).error(function(data, status, headers, config) {
+			erro("Error: " + status);
+		});
+		
+	}else { // nova cor
+		$scope.cor = {};
+	}
+	
+	
+	$scope.editarCor = function(id) {
+		$location.path('coredit/' + id);
+	};
+	
+	
+	// Responsável por salvar a cor ou editar os dados
+	$scope.salvarCor = function() {
+				$scope.cor.foto = document.getElementById("imagemCor").getAttribute("src");
+				
+				$http.post("cor/salvar", $scope.cor).success(function(response) {
+					$scope.cor = {};
+					document.getElementById("imagemCor").src = '';
+					sucesso("Gravado com sucesso!");
+				}).error(function(response) {
+					erro("Error: " + response);
+				});
+  
+      };
+          
+          
+	// listar todas as cores
+	$scope.listarCores = function(numeroPagina) {
+		$scope.numeroPagina = numeroPagina;
+		$http.get("cor/listar/" + numeroPagina).success(function(response) {
+			
+			if (response == null || response == '') {
+				$scope.ocultarNavegacao = true;
+			}else {
+				$scope.ocultarNavegacao = false;
+			}
+			
+			$scope.data = response;
+			
+			//---------Inicio total página----------
+				$http.get("cor/totalPagina").success(function(response) {
+					$scope.totalPagina = response;
+				}).error(function(response) {
+					erro("Error: " + response);
+				});
+			//---------Fim total página----------
+			
+		}).error(function(response) {
+			erro("Error: " + response);
+		});
+		
+	};
+	
+	$scope.proximo = function () {
+		if (new Number($scope.numeroPagina) < new Number($scope.totalPagina)) {
+		 $scope.listarCores(new Number($scope.numeroPagina + 1));
+		} 
+	};
+	
+	$scope.anterior = function () {
+		if (new Number($scope.numeroPagina) > 1) {
+		  $scope.listarCores(new Number($scope.numeroPagina - 1));
+		}
+	};
+	
+	// remover cor passada como parametro
+	$scope.removerCor = function(codCor) {
+		$http.delete("cor/deletar/" + codCor).success(function(response) {
+			$scope.listarCores($scope.numeroPagina);
+			sucesso("Removido com sucesso!"); 
+		}).error(function(data, status, headers, config) {
+			erro("Error: " + status);
+		});
+	};
+	
+});
+
+
+
+
+
+//configurações do controller de tamanhos dos pares de sapato
+app.controller('tamanhoController', function($scope, $http, $location, $routeParams) {
+	
+	if ($routeParams.id != null && $routeParams.id != undefined
+			&& $routeParams.id != ''){// se estiver editando
+		// entra pra editar
+		$http.get("tamanho/buscartamanho/" + $routeParams.id).success(function(response) {
+			$scope.tamanho = response;
+			
+			document.getElementById("codTamanho").src = $scope.tamanho.id;
+			//------------------ carrega estados e cidades do cliente em edição
+			setTimeout(function () {
+							
+			}, 1000);
+			//----------------------
+			
+		}).error(function(data, status, headers, config) {
+			erro("Error: " + status);
+		});
+		
+	}else { // novo tamanho
+		$scope.tamanho = {};
+	}
+	
+	
+	$scope.editarTamanho = function(id) {
+		$location.path('tamanhoedit/' + id);
+	};
+	
+	
+	// Responsável por salvar o tamanho ou editar os dados
+	$scope.salvarTamanho = function() {
+				$scope.tamanho.tamanho = document.getElementById("Tamanhope").getAttribute("src");
+				
+				$http.post("tamanho/salvar", $scope.tamanho).success(function(response) {
+					$scope.tamanho = {};
+					document.getElementById("Tamanhope").src = '';
+					sucesso("Gravado com sucesso!");
+				}).error(function(response) {
+					erro("Error: " + response);
+				});
+  
+      };
+          
+      
+	// listar todas os tamanhos
+	$scope.listarTamanhos = function(numeroPagina) {
+		$scope.numeroPagina = numeroPagina;
+		$http.get("tamanho/listar/" + numeroPagina).success(function(response) {
+			
+			if (response == null || response == '') {
+				$scope.ocultarNavegacao = true;
+			}else {
+				$scope.ocultarNavegacao = false;
+			}
+			
+			$scope.data = response;
+			
+			//---------Inicio total página----------
+				$http.get("cor/totalPagina").success(function(response) {
+					$scope.totalPagina = response;
+				}).error(function(response) {
+					erro("Error: " + response);
+				});
+			//---------Fim total página----------
+			
+		}).error(function(response) {
+			erro("Error: " + response);
+		});
+		
+	};
+	
+	$scope.proximo = function () {
+		if (new Number($scope.numeroPagina) < new Number($scope.totalPagina)) {
+		 $scope.listarTamanhos(new Number($scope.numeroPagina + 1));
+		} 
+	};
+	
+	$scope.anterior = function () {
+		if (new Number($scope.numeroPagina) > 1) {
+		  $scope.listarTamanhos(new Number($scope.numeroPagina - 1));
+		}
+	};
+	
+	// remover tamanho passado como parametro
+	$scope.removerTamanho = function(codTamanho) {
+		$http.delete("tamanho/deletar/" + codTamanho).success(function(response) {
+			$scope.listarTamanhos($scope.numeroPagina);
+			sucesso("Removido com sucesso!"); 
+		}).error(function(data, status, headers, config) {
+			erro("Error: " + status);
+		});
+	};
+	
+});
+
+
+
+
+
+//configurações do controller das Marcas de sapato
+app.controller('marcaController', function($scope, $http, $location, $routeParams) {
+	
+	if ($routeParams.id != null && $routeParams.id != undefined
+			&& $routeParams.id != ''){// se estiver editando
+		// entra pra editar
+		$http.get("marca/buscarmarca/" + $routeParams.id).success(function(response) {
+			$scope.marca = response;
+			
+			document.getElementById("codMarca").src = $scope.marca.id;
+			//------------------ carrega estados e cidades do cliente em edição
+			setTimeout(function () {
+							
+			}, 1000);
+			//----------------------
+			
+		}).error(function(data, status, headers, config) {
+			erro("Error: " + status);
+		});
+		
+	}else { // novo tamanho
+		$scope.tamanho = {};
+	}
+	
+	
+	$scope.editarTamanho = function(id) {
+		$location.path('tamanhoedit/' + id);
+	};
+	
+	
+	// Responsável por salvar o tamanho ou editar os dados
+	$scope.salvarTamanho = function() {
+				$scope.tamanho.tamanho = document.getElementById("Tamanhope").getAttribute("src");
+				
+				$http.post("tamanho/salvar", $scope.tamanho).success(function(response) {
+					$scope.tamanho = {};
+					document.getElementById("Tamanhope").src = '';
+					sucesso("Gravado com sucesso!");
+				}).error(function(response) {
+					erro("Error: " + response);
+				});
+  
+      };
+          
+      
+	// listar todas os tamanhos
+	$scope.listarTamanhos = function(numeroPagina) {
+		$scope.numeroPagina = numeroPagina;
+		$http.get("tamanho/listar/" + numeroPagina).success(function(response) {
+			
+			if (response == null || response == '') {
+				$scope.ocultarNavegacao = true;
+			}else {
+				$scope.ocultarNavegacao = false;
+			}
+			
+			$scope.data = response;
+			
+			//---------Inicio total página----------
+				$http.get("cor/totalPagina").success(function(response) {
+					$scope.totalPagina = response;
+				}).error(function(response) {
+					erro("Error: " + response);
+				});
+			//---------Fim total página----------
+			
+		}).error(function(response) {
+			erro("Error: " + response);
+		});
+		
+	};
+	
+	$scope.proximo = function () {
+		if (new Number($scope.numeroPagina) < new Number($scope.totalPagina)) {
+		 $scope.listarTamanhos(new Number($scope.numeroPagina + 1));
+		} 
+	};
+	
+	$scope.anterior = function () {
+		if (new Number($scope.numeroPagina) > 1) {
+		  $scope.listarTamanhos(new Number($scope.numeroPagina - 1));
+		}
+	};
+	
+	// remover tamanho passado como parametro
+	$scope.removerTamanho = function(codTamanho) {
+		$http.delete("tamanho/deletar/" + codTamanho).success(function(response) {
+			$scope.listarTamanhos($scope.numeroPagina);
+			sucesso("Removido com sucesso!"); 
+		}).error(function(data, status, headers, config) {
+			erro("Error: " + status);
+		});
+	};
+	
+});
+
+
+
+
+
+
+
+
 
 
 

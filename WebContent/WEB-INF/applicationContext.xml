@@ -83,6 +83,21 @@
 		<constructor-arg value="rslojavirtual.model.Pedido" />
 	</bean>
 	
+	<bean id="corController" name="corController"
+		class="rslojavirtual.controller.CorController">
+		<constructor-arg value="rslojavirtual.model.Cor" />
+	</bean>
+	
+	<bean id="tamanhoController" name="tamanhoController"
+		class="rslojavirtual.controller.TamanhoController">
+		<constructor-arg value="rslojavirtual.model.Tamanho" />
+	</bean>
+	
+	<bean id="marcaController" name="marcaController"
+		class="rslojavirtual.controller.MarcaController">
+		<constructor-arg value="rslojavirtual.model.Marca" />
+	</bean>
+	
 	<bean id="fileDownloadController" name="fileDownloadController"
 		class="rslojavirtual.controller.FileDownloadController">
 	</bean>

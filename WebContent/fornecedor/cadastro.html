@@ -2,8 +2,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
-<h1>Cadastro de fornecedor</h1>
-<a href="#fornecedorlist"> Lista de fornecedores <img alt="Novo"
+<h1>Cadastro de Fornecedor</h1>
+<a href="#fornecedorlist"> Lista de Fornecedores<img alt="Novo"
 	src="resources/img/list-icon.png" border="0">
 </a>
 
@@ -32,69 +32,64 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-12">
 						<div class="form-group">
 							<label>Razão Social</label> <input type="text" ng-model="fornecedor.razaoSocial"
 								class="form-control border-input" placeholder="Razão Social"
 								required="required">
 						</div>
 					</div>
-					<div class="col-md-6">
+				</div>
+				
+				<div class="row">
+					<div class="col-md-8">
 						<div class="form-group">
 							<label for="fantasia">Nome Fantansia</label> <input type="text"
 								required="required" class="form-control border-input"
 								ng-model="fornecedor.nomeFantasia" placeholder="Nome Fantansia">
 						</div>
 					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="fantasia">Nome Abrev.</label> <input type="text"
+								required="required" class="form-control border-input"
+								ng-model="fornecedor.nomeAbrev" placeholder="Nome Abreviado">
+						</div>
+					</div>
 				</div>
+				
 				<div class="row">
-					<div class="col-md-12">
+				    <div class="col-md-6">
+						<div class="form-group">
+							<label>CNPJ</label> <input type="text" id="cnpj"
+								ng-model="fornecedor.cnpj" class="form-control border-input"
+								placeholder="Cnpj" required="required">
+						</div>
+					</div>		
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Insrição Estadual</label> 
+							<input type="number" class="form-control" id="cpf" name="cpf" ng-model="fornecedor.inscricaoEstadual" placeholder="Insrição Estadual">						
+						</div>
+					</div>		
+				</div>
+				
+				<div class="row">
+					<div class="col-md-8">
 						<div class="form-group">
 							<label for="endereco">Endereço</label> <input type="text"
 								required="required" class="form-control border-input"
 								ng-model="fornecedor.endereco" placeholder="Endereço">
 						</div>
 					</div>
-				</div>
-				
-
-				<div class="row">
-					<div class="col-md-5">
+					<div class="col-md-4">
 						<div class="form-group">
-							<label>Telefone</label> <input type="text" id="telefone"
-								ng-model="fornecedor.telefone" class="form-control border-input"
-								placeholder="Telefone" required="required">
-
-						</div>
-					</div>
-					
-					
-					<div class="col-md-5">
-						<div class="form-group">
-							<label>Cnpj</label> <input type="text" id="cnpj"
-								ng-model="fornecedor.cnpj" class="form-control border-input"
-								placeholder="Cnpj" required="required">
-						</div>
-					</div>
-					
-					
-					<div class="col-md-1">
-						<div class="form-group">
-							<label>Ativo</label> 
-							<input type="checkbox" class="form-control" ng-model="fornecedor.ativo">						
+							<label for="endereco">Bairro</label> <input type="text"
+							    class="form-control border-input"
+								ng-model="fornecedor.bairro" placeholder="Bairro">
 						</div>
 					</div>
 				</div>
-				
-				<div class="row">
-					<div class="col-md-7">
-						<div class="form-group">
-							<label>Insrição Estadual</label> 
-							<input type="number" class="form-control" id="cpf" name="cpf" ng-model="fornecedor.inscricaoEstadual" placeholder="Insrição Estadual">						
-						</div>
-					</div>
-			   </div>		
-				
 				
 				<div class="row">
 					<div class="col-md-3">
@@ -112,8 +107,7 @@
 							</select>	
 						</div>
 					</div>
-					
-					<div class="col-md-5">
+					<div class="col-md-6">
 						<div class="form-group"> 
 						   <label>Cidades</label> 
 							<select id="selectCidades" ng-model="fornecedor.cidades.id" 
@@ -125,10 +119,55 @@
 							</select>	
 						</div>
 					</div>
+					<div class="col-md-3">
+					     <div class="form-group">
+							<label for="cep">CEP</label> <input type="text" id="cep"
+							    class="form-control border-input"
+								ng-model="fornecedor.cep" placeholder="CEP">
+					    </div>
+					</div>
 					
 				</div>
 				
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Telefone</label> <input type="text" id="telefone1"
+								ng-model="fornecedor.telefone1" class="form-control border-input"
+								placeholder="Telefone" required="required">
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Telefone 2</label> <input type="text" id="telefone2"
+								ng-model="fornecedor.telefone2" class="form-control border-input"
+								placeholder="Telefone">
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>FAX</label> <input type="text" id="fax"
+								ng-model="fornecedor.fax" class="form-control border-input"
+								placeholder="FAX">
+						</div>
+					</div>
+				</div>
 				
+				<div class="row">
+				    <div class="col-md-10">
+						<div class="form-group">
+							<label>E-mail</label> <input type="text"
+								ng-model="fornecedor.email" class="form-control border-input"
+								placeholder="E-mail">
+						</div>
+					</div>
+					<div class="col-md-1">
+						<div class="form-group">
+							<label>Ativo</label> 
+							<input type="checkbox" class="form-control" ng-model="fornecedor.ativo">						
+						</div>
+					</div>				
+				</div>				
 				
 				<button type="submit" class="btn btn-info btn-fill btn-wd">Cadastrar</button>
 				<button type="submit" class="btn btn-info btn-fill btn-wd"
@@ -137,7 +176,10 @@
 		</div>
 	</div>
  <script type="text/javascript">
- 	$('#telefone').mask('(99) 9999-9999');
+ 	$('#telefone1').mask('(99) 9999-9999');
+ 	$('#telefone2').mask('(99) 9999-9999');
+ 	$('#fax').mask('(99) 9999-9999');
  	$('#cnpj').mask('999.999.999/9999-9');
+ 	$('#cep').mask('99999-999');
  </script>	
 </html>
