@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.ForeignKey;
 
 @Entity
-public class Cor {
+public class Categoria {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -20,11 +20,6 @@ public class Cor {
 	private Long id;
 	
 	private String nome;
-	
-	private Boolean ativo;
-	
-	@Column(columnDefinition="text")
-	private String foto;
 	
 	
 	public Long getId() {
@@ -41,22 +36,6 @@ public class Cor {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-	
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
-	}	
-	
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
-	
-	public String getFoto() {
-		return foto;
 	}
 	
 	
@@ -76,7 +55,7 @@ public class Cor {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cor other = (Cor) obj;
+		Categoria other = (Categoria) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

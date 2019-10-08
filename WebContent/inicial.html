@@ -46,8 +46,11 @@
 <script type="text/javascript" src="resources/js/app.js"></script>
 
 <script type="text/javascript" src="resources/js/lojaController.js"></script>
-<script type="text/javascript" src="resources/js/livroController.js"></script>
+<script type="text/javascript" src="resources/js/produtoController.js"></script>
 
+<!--
+<script type="text/javascript" src="resources/js/livroController.js"></script>
+ -->
 
 <style type="text/css">
 
@@ -81,30 +84,33 @@
 					<li class="active"><a href="#fornecedorlist">
 							<p>Fornecedor</p>
 					</a></li>
-					<li class="active"><a href="#livrolist">
-							<p>Sapato</p>
+					<li class="active"><a href="#produtolist">
+							<p>Produto</p>
 					</a></li>
-					<li class="active"><a href="#">
+					<li class="active"><a href="#vendedorlist">
 							<p>Vendedor</p>
 					</a></li>
-					<li class="active"><a href="#">
-							<p>Marcas Sapato</p>
+					<li class="active"><a href="#marcalist">
+							<p>Marca(s) Produto</p>
 					</a></li>
 					<li class="active"><a href="#tamanholist">
-							<p>Tamanho(s) Sapato</p>
+							<p>Tamanho(s) Produto</p>
 					</a></li>
-					<li class="active"><a href="#corlist">
-							<p>Cor</p>
+					<li class="active"><a href="#categorialist">
+							<p>Categoria(s) Produto</p>
+					</a></li>
+					<li class="active"><a href="#estoqueprodutolist">
+							<p>Estoque Produto</p>
 					</a></li>
 					<li class="active"><a href="#/loja/online">
-							<p>Loja de Sapato(s)</p>
+							<p>Loja</p>
 					</a></li>
 					<li class="active"><a href="#/loja/pedidos">
 							<p>Pedidos</p>
 					</a></li>
 					
 					<li class="active"><a href="#/grafico/media_pedido">
-							<p>Média Sapato p\ Pedido</p>
+							<p>Média Produto p\ Pedido</p>
 					</a></li>
 				</ul>
 			</div>
@@ -127,14 +133,15 @@
 								<ul class="dropdown-menu">
 									<li><a href="#/cliente/cadastro">Novo Cliente</a></li>
 									<li><a href="#/fornecedor/cadastro">Novo Fornecedor</a></li>
-									<li><a href="#/livro/cadastro">Novo Sapato</a></li>
-									<li><a href="#">Novo Vendedor</a></li>
-									<li><a href="#">Nova Marca</a></li>
+									<li><a href="#/produto/cadastro">Novo Produto</a></li>
+									<li><a href="#vendedor/cadastro">Novo Vendedor</a></li>
+									<li><a href="#/marca/cadastro">Nova Marca</a></li>
 									<li><a href="#/tamanho/cadastro">Novo Tamanho</a></li>
-									<li><a href="#/cor/cadastro">Nova Cor</a></li>
-									<li><a href="#/loja/online">Loja de Sapato(s)</a></li>
+									<li><a href="#/categoria/cadastro">Nova Categoria</a></li>
+									<li><a href="#estoqueproduto/cadastro">Estoque Produto</a></li>
+									<li><a href="#/loja/online">Loja</a></li>
 									<li><a href="#/loja/pedidos">Pedidos</a></li>
-									<li><a href="#/grafico/media_pedido">Média de Sapato(s)</a></li>
+									<li><a href="#/grafico/media_pedido">Média de Produto(s)</a></li>
 								</ul></li>
 							<li><a href="#/">
 									<p>Sair</p>
@@ -164,7 +171,7 @@
             });
     	});
     
-    	$.get("livro/autenticar", function(data) {
+    	$.get("sapato/autenticar", function(data) {
 		 /*   json = JSON.parse(data);
 		    permissao = json.permissao;
 		    

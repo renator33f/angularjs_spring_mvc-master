@@ -1,4 +1,4 @@
-// configrações loja de livros
+// configrações da loja
 app.controller("lojaController", function($scope, $http, $location, $routeParams) {
 	
 	
@@ -26,16 +26,18 @@ app.controller("lojaController", function($scope, $http, $location, $routeParams
 	
 	$scope.finalizarPedido = function () {
 
-		$scope.pedidoObjeto.cliente = $scope.clienteAdiconado;
+		$scope.pedidoObjeto.cliente  = $scope.clientesPesquisa.cliente;
+		$scope.pedidoObjeto.vendedor = $scope.vendedoresPesquisa.vendedor;
 		
 		$http.post("pedido/finalizar", {"pedido" : $scope.pedidoObjeto,
 			"itens" : $scope.itensCarrinho}).success(function(response) {
+			
 			$scope.pedidoObjeto = {};
 			$scope.itensCarrinho = {};
 			
 			$location.path("loja/pedidoconfirmado/"+response);
 			
-			sucesso("Pedido Finalizado!");
+			sucesso("Pedido Realizado!");
 		}).error(function(response) {
 			erro("Error: " + response);
 		});
@@ -50,11 +52,28 @@ app.controller("lojaController", function($scope, $http, $location, $routeParams
 		});
 	};
 	
+	$scope.buscarVendedorNome = function () {
+		$http.get("vendedor/buscarnome/" + $scope.filtroVendedor).success(function(response) {
+			$scope.vendedoresPesquisa = response;
+		}).error(function(response) {
+			erro("Error: " + response);
+		});
+	};
+	
 	$scope.adicionarClienteCarrinho = function (cliente) {
-		$scope.pedidoObjeto.cliente = cliente;
-		$scope.clienteAdiconado = cliente;
-		$scope.clientesPesquisa = {};
-		$scope.filtroCliente = "";
+		$scope.clientesPesquisa.cliente = cliente;
+	//	$scope.pedidoObjeto.cliente = cliente;
+	//	$scope.clienteAdicionado = cliente;
+	//	$scope.clientesPesquisa = {};
+	//	$scope.filtroCliente = "";
+	};
+	
+	$scope.adicionarVendedorCarrinho = function (vendedor) {
+		$scope.vendedoresPesquisa.vendedor = vendedor;
+	//	$scope.pedidoObjeto.vendedor = vendedor;
+	//	$scope.vendedorAdicionado = vendedor;
+	//	$scope.vendedoresPesquisa = {};
+	//	$scope.filtroVendedor = "";
 	};
 	
 	
@@ -70,22 +89,22 @@ app.controller("lojaController", function($scope, $http, $location, $routeParams
 		});
 		
 	}else {
-		$scope.carrinhoLivro = new Array();
+		$scope.carrinhoProduto = new Array();
 	}
 	
-	$scope.addLivro = function (livroid) {
-		$scope.carrinhoLivro.push(livroid);
+	$scope.addProduto = function (produtoid) {
+		$scope.carrinhoProduto.push(produtoid);
 		
 	};
 	
-	$scope.recalculo = function (quantidade, livro) {
+	$scope.recalculo = function (quantidade, produto) {
 		var valorTotal = new Number();
 		for (var i = 0; i < $scope.itensCarrinho.length; i++){
-				var valorLivro = $scope.itensCarrinho[i].livro.valor.replace("R","").replace("$", "").replace(".","").replace(",", ".");
-				if ($scope.itensCarrinho[i].livro.id == livro){
-					valorTotal += parseFloat(valorLivro * quantidade);
+				var valorProduto = $scope.itensCarrinho[i].produto.valor.replace("R","").replace("$", "").replace(".","").replace(",", ".");
+				if ($scope.itensCarrinho[i].produto.id == produto){
+					valorTotal += parseFloat(valorProduto * quantidade);
 				}else {
-					valorTotal += parseFloat(valorLivro * $scope.itensCarrinho[i].quantidade);
+					valorTotal += parseFloat(valorProduto * $scope.itensCarrinho[i].quantidade);
 				}
 				
 		}
@@ -93,18 +112,18 @@ app.controller("lojaController", function($scope, $http, $location, $routeParams
 	};
 	
 	
-	$scope.removerLivroCarrinho = function (livroid) {
+	$scope.removerProdutoCarrinho = function (produtoid) {
 		
 		$scope.intensTemp = new Array();
 		var valorTotal = new Number();
 		for (var i = 0; i < $scope.itensCarrinho.length; i++){
-			if ($scope.itensCarrinho[i].livro.id === livroid){
+			if ($scope.itensCarrinho[i].produto.id === produtoid){
 			}else {
 				// itens validos
 				$scope.intensTemp.push($scope.itensCarrinho[i]);
 				
-				var valorLivro = $scope.itensCarrinho[i].livro.valor.replace("R","").replace("$", "").replace(".","").replace(",", ".");
-				valorTotal += parseFloat(valorTotal) + parseFloat(valorLivro * $scope.itensCarrinho[i].quantidade);
+				var valorProduto = $scope.itensCarrinho[i].produto.valor.replace("R","").replace("$", "").replace(".","").replace(",", ".");
+				valorTotal += parseFloat(valorTotal) + parseFloat(valorProduto * $scope.itensCarrinho[i].quantidade);
 				
 			};
 		}
@@ -114,17 +133,17 @@ app.controller("lojaController", function($scope, $http, $location, $routeParams
 	
 	
 	$scope.fecharPedido = function() {
-		$location.path('loja/intensLoja/' + $scope.carrinhoLivro);
+		$location.path('loja/intensLoja/' + $scope.carrinhoProduto);
 	};
 	
-	// listar todos os livros
-	$scope.listarLivros = function(numeroPagina) {
+	// listar todos os produtos
+	$scope.listarProdutos = function(numeroPagina) {
 		$scope.numeroPagina = numeroPagina;
-		$http.get("livro/listar/" + numeroPagina).success(function(response) {
+		$http.get("produto/listar/" + numeroPagina).success(function(response) {
 			$scope.data = response;
 			
 			//---------Inicio total página----------
-				$http.get("livro/totalPagina").success(function(response) {
+				$http.get("produto/totalPagina").success(function(response) {
 					$scope.totalPagina = response;
 				}).error(function(response) {
 					erro("Error: " + response);
@@ -139,13 +158,13 @@ app.controller("lojaController", function($scope, $http, $location, $routeParams
 	
 	$scope.proximo = function () {
 		if (new Number($scope.numeroPagina) < new Number($scope.totalPagina)) {
-		 $scope.listarLivros(new Number($scope.numeroPagina + 1));
+		 $scope.listarProdutos(new Number($scope.numeroPagina + 1));
 		} 
 	}; 
 	
 	$scope.anterior = function () {
 		if (new Number($scope.numeroPagina) > 1) {
-		  $scope.listarLivros(new Number($scope.numeroPagina - 1));
+		  $scope.listarProdutos(new Number($scope.numeroPagina - 1));
 		}
 	};
 	

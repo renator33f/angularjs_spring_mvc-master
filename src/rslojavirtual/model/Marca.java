@@ -13,6 +13,8 @@ import org.hibernate.annotations.ForeignKey;
 @Entity
 public class Marca {
 	
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;

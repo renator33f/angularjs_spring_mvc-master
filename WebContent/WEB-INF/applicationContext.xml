@@ -68,9 +68,16 @@
 		<constructor-arg value="rslojavirtual.model.Fornecedor" />
 	</bean>
 	
+
 	<bean id="livroController" name="livroController"
 		class="rslojavirtual.controller.LivroController">
 		<constructor-arg value="rslojavirtual.model.Livro" />
+	</bean>
+
+	
+	<bean id="produtoController" name="produtoController"
+		class="rslojavirtual.controller.ProdutoController">
+		<constructor-arg value="rslojavirtual.model.Produto" />
 	</bean>
 	
 	<bean id="itemPedidoController" name="itemPedidoController"
@@ -83,11 +90,6 @@
 		<constructor-arg value="rslojavirtual.model.Pedido" />
 	</bean>
 	
-	<bean id="corController" name="corController"
-		class="rslojavirtual.controller.CorController">
-		<constructor-arg value="rslojavirtual.model.Cor" />
-	</bean>
-	
 	<bean id="tamanhoController" name="tamanhoController"
 		class="rslojavirtual.controller.TamanhoController">
 		<constructor-arg value="rslojavirtual.model.Tamanho" />
@@ -96,6 +98,21 @@
 	<bean id="marcaController" name="marcaController"
 		class="rslojavirtual.controller.MarcaController">
 		<constructor-arg value="rslojavirtual.model.Marca" />
+	</bean>
+	
+	<bean id="categoriaController" name="categoriaController"
+		class="rslojavirtual.controller.CategoriaController">
+		<constructor-arg value="rslojavirtual.model.Categoria" />
+	</bean>
+	
+	<bean id="vendedorController" name="vendedorController"
+		class="rslojavirtual.controller.VendedorController">
+		<constructor-arg value="rslojavirtual.model.Vendedor" />
+	</bean>
+	
+	<bean id="estoqueProdutoController" name="estoqueProdutoController"
+		class="rslojavirtual.controller.EstoqueProdutoController">
+		<constructor-arg value="rslojavirtual.model.EstoqueProduto" />
 	</bean>
 	
 	<bean id="fileDownloadController" name="fileDownloadController"

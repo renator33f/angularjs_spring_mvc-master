@@ -2,36 +2,36 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
-<h1>Lista de Cores</h1>
+<h1>Lista de Categorias</h1>
 
 
-<a href="#cor/cadastro">Nova
+<a href="#categoria/cadastro">Nova
 <img alt="Novo" src="resources/img/add-icon.png" border="0">
 </a>
 
 <br/>
 <br/>
-<label>Filtrar Cor<input class="form-control" type="text" ng-model="filtro"></label><br>
+<label>Filtrar Categoria<input class="form-control" type="text" ng-model="filtro"></label><br>
 <br/>
 
-<div ng-controller="corController" ng-init="listarCores(1)">
+<div ng-controller="categoriaController" ng-init="listarCategorias(1)">
 
 	<div class="content table-responsive table-full-width">
 		<table class="table table-hover">
 			<thead>
 				<th>ID</th>
-				<th>Nome</th> 
+				<th>Categoria</th> 
 				<th>Excluir</th>
 				<th>Editar</th>
 			</thead>
 			<tbody>
-				<tr ng-repeat="cor in data | filter:filtro"> 
-					<td>{{cor.id}}</td>
-					<td>{{cor.nome}}</td>
-					<td> <a href ng-click="removerCor(cor.id);">Excluir
+				<tr ng-repeat="categoria in data | filter:filtro"> 
+					<td>{{categoria.id}}</td>
+					<td>{{categoria.nome}}</td>
+					<td> <a href ng-click="removerCategoria(categoria.id);">Excluir
 					 <img alt="Remover" src="resources/img/delete-icon.png" border="0">
 					</a></td>
-					<td> <a href ng-click="editarCor(cor.id);">Editar
+					<td> <a href ng-click="editarCategoria(categoria.id);">Editar
 					 <img alt="Editar" src="resources/img/edit-icon.png" border="0">
 					</a></td>
 				</tr>

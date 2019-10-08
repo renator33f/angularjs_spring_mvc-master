@@ -19,7 +19,7 @@ public class Tamanho {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	private String tamanhope;
+	private String numero;
 	
 	
 	public Long getId() {
@@ -30,12 +30,12 @@ public class Tamanho {
 		this.id = id;
 	}
 	
-	public String getTamanhope() {
-		return tamanhope;
+	public String getNumero() {
+		return numero;
 	}
 
-	public void setTamanhope(String tamanhope) {
-		this.tamanhope = tamanhope;
+	public void setNumero(String numero) {
+		this.numero = numero;
 	}
 	
 	

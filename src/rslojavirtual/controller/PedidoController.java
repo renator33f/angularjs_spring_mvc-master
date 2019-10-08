@@ -5,6 +5,10 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
 
+import javax.swing.JOptionPane;
+
+import org.hibernate.Session;
+import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,9 +19,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import rslojavirtual.dao.DaoImplementacao;
 import rslojavirtual.dao.DaoInterface;
+import rslojavirtual.hibernate.HibernateUtil;
 import rslojavirtual.model.ItemPedido;
 import rslojavirtual.model.Pedido;
 import rslojavirtual.model.PedidoBean;
+import rslojavirtual.model.EstoqueProduto; 
+import rslojavirtual.model.Produto;
 
 import com.google.gson.Gson;
 
@@ -29,6 +36,10 @@ public class PedidoController extends DaoImplementacao<Pedido> implements
 	@Autowired
 	private ItemPedidoController itemPedidoController;
 
+	@Autowired
+	private ProdutoController produtoController;
+
+	
 	public PedidoController(Class<Pedido> persistenceClass) {
 		super(persistenceClass);
 	}
@@ -36,10 +47,10 @@ public class PedidoController extends DaoImplementacao<Pedido> implements
 	@RequestMapping(value = "grafico", method = RequestMethod.GET)
 	public @ResponseBody String grafico() {
 
-		String sql = "select trunc(avg(ip.quantidade),2) as media, l.titulo"
-				+ " from livro l "
-				+ " inner join  itempedido ip on ip.livro_id = l.id"
-				+ " group by l.id";
+		String sql = "select trunc(avg(ip.quantidade),2) as media, p.modelo"
+				+ " from produto p "
+				+ " inner join  itempedido ip on ip.produto_id = p.id"
+				+ " group by p.id";
 		
 		List<Object[]> lista = getSessionFactory().getCurrentSession().createSQLQuery(sql).list();
 
@@ -47,7 +58,7 @@ public class PedidoController extends DaoImplementacao<Pedido> implements
 		int cont = 0;
 		
 		
-		retorno[cont] = "[\"" + "Livro" +  "\"," + "\"" + "Quantidade " + "\"]";
+		retorno[cont] = "[\"" + "Produto" +  "\"," + "\"" + "Quantidade " + "\"]";
 		cont ++;
 		
 		for (Object[] object : lista) {
@@ -63,6 +74,8 @@ public class PedidoController extends DaoImplementacao<Pedido> implements
 	@RequestMapping(value = "finalizar", method = RequestMethod.POST)
 	@ResponseBody
 	public String finalizar(@RequestBody String jsonPedido) throws Exception {
+		
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
 
 		PedidoBean pedidoBean = new Gson().fromJson(jsonPedido,
 				PedidoBean.class);
@@ -72,12 +85,42 @@ public class PedidoController extends DaoImplementacao<Pedido> implements
 		pedido.setData(Calendar.getInstance().getTime());
 
 		pedido = super.merge(pedido);
-
+		
 		List<ItemPedido> inItemPedidos = pedidoBean.getItens();
+		
+		List<Produto> produtos = produtoController.lista();
 
 		for (ItemPedido itemPedido : inItemPedidos) {
-			itemPedido.setPedido(pedido);
-			itemPedidoController.salvar(itemPedido);
+			
+		   itemPedido.setPedido(pedido);
+		   JOptionPane.showMessageDialog(null, "mensagem aki");
+		   		
+			
+			//itemPedido.setProduto(produto);
+			//Produto estoqproduto = itemPedido.getProduto();
+			//estoqproduto.setQuantidade(estoqproduto.getQuantidade() - itemPedido.getQuantidade());
+		    //sessao.update(jsonPedido, estoqproduto);
+			//System.out.println(itemPedido.getProduto());
+		   
+		   for (Produto produto: produtos) {
+			   
+			   itemPedido.setProduto(produto);
+			   Produto estoqproduto = itemPedido.getProduto();
+			   estoqproduto.setQuantidade(estoqproduto.getQuantidade() - itemPedido.getQuantidade());
+			 //  sessao.update(estoqproduto);	
+			 
+			 //  inItemPedidos.add(itemPedido);
+			   itemPedidoController.salvar(itemPedido);
+			    
+			   JOptionPane.showMessageDialog(null, "mensagem aki 2");
+			   JOptionPane.showMessageDialog(null, itemPedido.getId());
+			   JOptionPane.showMessageDialog(null, estoqproduto.getId());
+			   JOptionPane.showMessageDialog(null, estoqproduto.getQuantidade());
+			   JOptionPane.showMessageDialog(null, itemPedido.getQuantidade());
+			  // JOptionPane.showMessageDialog(null, estoqproduto.getQuantidade());
+		  
+		   }
+		   
 		}
 
 		return pedido.getId().toString();

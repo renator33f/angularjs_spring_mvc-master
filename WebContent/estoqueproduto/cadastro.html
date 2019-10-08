@@ -1,0 +1,71 @@
+<html ng-app="loja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<h1>Estoque Produto (Novo)</h1>
+<a href="#estoqueprodutolist"> Consulta Estoque <img alt="Consulta Estoque"
+	src="resources/img/list-icon.png" border="0">
+</a>
+
+<br />
+<br />
+<!-- <div ng-controller="estoqueProdutoController"> -->
+	<div class="card">
+		<div class="content">
+			<form id="formEstoqueProduto" ng-submit="salvarEstoqueProduto();">
+				<div class="row"> 		
+					<div class="col-md-1">
+						<div class="form-group">
+							<label>Id</label> <input type="text" ng-model="estoqueproduto.id" id="codEstoqueProduto"
+								class="form-control border-input" disabled />
+						</div>
+					</div>					
+				</div>		
+				
+			
+				    <label>Pesquisar Produto <input class="form-control" type="text" ng-model="filtroProduto"></label>
+                    <button type="button" class="btn btn-info btn-fill btn-wd" ng-click="buscarProdutoNome();">Buscar</button>
+                    <table class="table table-hover">
+                       <tr ng-repeat="produto in produtosPesquisa">
+  	                      <td>{{produto.id}}</td>
+  	                      <td>{{produto.modelo}}</td>
+  	                      <td>
+  	                         <button type="button" class="btn btn-info btn-fill btn-wd" ng-click="adicionarProdutoEstoque(produto);">Adicionar</button>
+  	                         <!--  
+  	                         <a href ng-click="adicionarProdutoEstoque(produto);">Adicionar
+					         <img alt="Adicionar Produto" title="Adicionar Produto" 
+					              src="resources/img/add-icon.png" border="0">
+					         </a> -->
+              		      </td>
+                       </tr>
+                    </table>
+                    <br/>
+                    <label>Produto</label>
+                    <input class="form-control" style="max-width: 100px;" ng-model="produtosPesquisa.produto.id" value="{{produtosPesquisa.produto.id}}" readonly="readonly" type="text" id="codProduto"/>
+                    <br>
+                    <input class="form-control" readonly="readonly" ng-model="produtosPesquisa.produto.modelo" value="{{produtosPesquisa.produto.modelo}}" type="text" id="Modelo"/>
+                    <br>
+                    <br/>
+                    
+                    
+                <div class="row"> 		
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Quantidade</label> <input type="text" ng-model="estoqueproduto.quantidade" id="quantidade"
+								class="form-control border-input" />
+						</div>
+					</div>					
+				</div>		
+				  
+				  
+				
+				 
+				 
+				<button type="submit" class="btn btn-info btn-fill btn-wd">Cadastrar</button>
+				<button type="button" class="btn btn-info btn-fill btn-wd"
+					onclick="document.getElementById('formEstoqueProduto').reset();">Limpar</button>
+			</form>
+		</div>
+	</div>
+<!-- </div> -->	
+</html>

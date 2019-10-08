@@ -1,0 +1,45 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<h1>Cadastro de Categorias</h1>
+<a href="#categorialist"> Lista de Categorias <img alt="Novo"
+	src="resources/img/list-icon.png" border="0">
+</a>
+
+<br />
+<br />
+
+	<div class="card">
+		<div class="content">
+			<form id="formCategoria" ng-submit="salvarCategoria();">
+				<div class="row">
+		             		
+					<div class="col-md-2">
+						<div class="form-group">
+							<label>Id</label> <input type="text" ng-model="categoria.id" id="codCategoria"
+								class="form-control border-input" disabled />
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Categoria</label> <input type="text" ng-model="categoria.nome"
+								class="form-control border-input" placeholder="Nome da Categoria" id="Nome"
+								required="required">
+						</div>
+					</div>
+			
+				</div>				
+				 
+				 
+				<button type="submit" class="btn btn-info btn-fill btn-wd">Cadastrar</button>
+				<button type="button" class="btn btn-info btn-fill btn-wd"
+					onclick="document.getElementById('formCategoria').reset();">Limpar</button>
+			</form>
+		</div>
+	</div>
+ 
+</html>

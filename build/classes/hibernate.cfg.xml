@@ -27,12 +27,16 @@
 	    <mapping class="rslojavirtual.model.Cidades" />
 		<mapping class="rslojavirtual.model.Cliente" />
 		<mapping class="rslojavirtual.model.Fornecedor" />
-		<mapping class="rslojavirtual.model.Livro" />
+		<!-- <mapping class="rslojavirtual.model.Livro" /> -->
 		<mapping class="rslojavirtual.model.Pedido" />
 		<mapping class="rslojavirtual.model.ItemPedido" />
-		<mapping class="rslojavirtual.model.Cor" />
+		<!-- <mapping class="rslojavirtual.model.Cor" /> -->
 		<mapping class="rslojavirtual.model.Tamanho" />
 		<mapping class="rslojavirtual.model.Marca" />
+		<mapping class="rslojavirtual.model.Produto" />
+		<mapping class="rslojavirtual.model.Categoria" />
+		<mapping class="rslojavirtual.model.Vendedor" />
+		<mapping class="rslojavirtual.model.EstoqueProduto" />
 		
 		
 	</session-factory>

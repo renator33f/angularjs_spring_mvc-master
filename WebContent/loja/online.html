@@ -2,31 +2,31 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
-<h1>Loja on-line de livros</h1>
+<h1>Loja On-line</h1>
 
 <br/>
 <br/>
-<a ng-click="fecharPedido();">{{carrinhoLivro.length}} Itens no Carrinho <img alt="Carrinho" title="Carrinho de Livro"
+<a ng-click="fecharPedido();">{{carrinhoProduto.length}} Itens do Carrinho <img alt="Carrinho" title="Carrinho de Produtos"
 	src="resources/img/carrinho.png" border="0" height="40px;" width="40px;">
 </a>
 
 <br/>
 <br/>
 
-<div class="col-lg-9 col-md-8"  ng-init="listarLivros(1);">
+<div class="col-lg-9 col-md-8"  ng-init="listarProdutos(1);">
 	<div class="card">
 		<div class="content">
-			<form id="formLivro">
+			<form id="formProduto">
 				<div class="row">
-					<div class="col-md-3" ng-repeat="livro in data">
+					<div class="col-md-3" ng-repeat="produto in data">
 						<div class="form-group">
-						    <label style="color: black;">{{livro.titulo}}</label>
-							<img alt="Foto de Capa" id="imagemLivro" src="{{livro.foto}}"  style="width: 170px;height: 200px;" border="0">
-							<label onclick="mostrarDescricao(this.title)" title="{{livro.descricao}}">Ver Descrição</label>
+						    <label style="color: black;">{{produto.modelo}}</label>
+							<img alt="Foto de Capa" id="imagemProduto" src="{{produto.foto}}"  style="width: 170px;height: 200px;" border="0">
+							<label onclick="mostrarDescricao(this.title)" title="{{produto.descricao}}">Ver Descrição</label>
 							<br/>
-							<label style="color: green;">{{livro.valor}}</label>
+							<label style="color: green;">{{produto.valor}}</label>
 							<br/>
-							<button type="button" ng-click="addLivro(livro.id);"  class="btn btn-info btn-fill btn-wd" >Adicionar</button>
+							<button type="button" ng-click="addProduto(produto.id);"  class="btn btn-info btn-fill btn-wd" >Adicionar</button>
 						</div>
 					</div>
 				</div>	
@@ -39,10 +39,10 @@
 			</div>  
 		</div> 
 	</div>
-	<div id="descricaloLivro" title="Descrição resumida do livro" style="height: 200px; width: 400px;"></div>
+	<div id="descricaoProduto" title="Descrição Resumida do Produto" style="height: 200px; width: 400px;"></div>
 	<script type="text/javascript">
 			function mostrarDescricao(descricao) {
-				$('#descricaloLivro').html("<p>"+descricao+"</p").dialog({modal:true});
+				$('#descricaoProduto').html("<p>"+descricao+"</p").dialog({modal:true});
 			}
 	
 	</script>

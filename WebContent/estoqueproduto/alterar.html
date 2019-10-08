@@ -1,0 +1,59 @@
+<html ng-app="loja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<h1>Estoque Produto (Alterar)</h1>
+<a href="#estoqueprodutolist"> Consulta Estoque <img alt="Consulta Estoque"
+	src="resources/img/list-icon.png" border="0">
+</a>
+
+<br />
+<br />
+<!-- <div ng-controller="estoqueProdutoController"> -->
+	<div class="card">
+		<div class="content">
+			<form id="formEstoqueProduto" ng-submit="alterarEstoqueProduto();">
+				<div class="row"> 		
+					<div class="col-md-2">
+						<div class="form-group">
+							<label>Id</label> <input type="text" ng-model="estoqueproduto.id" id="codEstoqueProduto"
+								class="form-control border-input" disabled />
+						</div>
+					</div>					
+				</div>		
+				
+				<div class="row">
+				    <div class="col-md-2">
+						<div class="form-group">
+							<label>Produto</label> <input type="text" ng-model="estoqueproduto.produto.id" id="codIdProduto"
+								class="form-control border-input" disabled />
+						</div>
+					</div>	
+					 		
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Descrição</label> <input type="text" ng-model="estoqueproduto.produto.modelo" id="modeloProduto"
+								class="form-control border-input" disabled />
+						</div>
+					</div>					
+				</div>	                   
+                    
+                <div class="row"> 		
+					<div class="col-md-2">
+						<div class="form-group">
+							<label>Quantidade</label> <input type="text" ng-model="estoqueproduto.quantidade" id="quantidade"
+								class="form-control border-input" />
+						</div>
+					</div>					
+				</div>		
+				  
+
+				 
+				<button type="submit" class="btn btn-info btn-fill btn-wd">Confirmar</button>
+				<button type="button" class="btn btn-info btn-fill btn-wd"
+					onclick="document.getElementById('formEstoqueProduto').reset();">Limpar</button>
+			</form>
+		</div>
+	</div>
+<!-- </div> -->	
+</html>

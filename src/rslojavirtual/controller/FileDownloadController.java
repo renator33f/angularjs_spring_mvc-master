@@ -68,8 +68,8 @@ public class FileDownloadController {
 		
 		filePath = reportUtil.geraRelatorio(dados,
 				new HashMap(),
-				"rel_pedido", 
-				"rel_pedido", 
+				"rel_pedido_cad", 
+				"rel_pedido_cad", 
 				context);
 		
 		//Construir o caminho completo absoluto do arquivo

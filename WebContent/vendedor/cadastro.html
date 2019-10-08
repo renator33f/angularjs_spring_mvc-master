@@ -1,0 +1,196 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<h1>Cadastro de Vendedor </h1>
+<a href="#vendedorlist"> Lista de Vendedores <img alt="Novo"
+	src="resources/img/list-icon.png" border="0">
+</a>
+
+<br />
+<br />
+
+<div class="col-lg-9 col-md-8"  ng-init="carregarEstados();">
+	<div class="card">
+		<div class="content">
+			<form id="formVendedor" ng-submit="salvarVendedor();">
+				<div class="row">
+				
+					<div class="col-md-3">
+						<div class="form-group">
+							<img alt="Foto" id="imagemVendedor" src=""  style="width: 118px;height: 140px;" border="0">
+							<input type="file"  id="file"  onchange="javascript:visualizarImg();">
+						</div>
+					</div>
+				
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Id</label> <input type="text" ng-model="vendedor.id"
+								class="form-control border-input" disabled />
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>Nome</label> <input type="text" ng-model="vendedor.nome"
+								class="form-control border-input" placeholder="Nome"
+								required="required">
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>CPF</label> 
+							<input type="text" class="form-control" id="cpf" name="cpf" ng-model="vendedor.cpf" required="required">						
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>RG</label> 
+							<input type="text" class="form-control" id="rg" name="rg" ng-model="vendedor.rg" required="required">						
+						</div>
+					</div>					
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Sexo</label> 
+							<select ng-model="vendedor.sexo" class="form-control"> 
+							  <option value="Masculino">Masculino</option>
+							  <option value="Feminino">Feminino</option>
+							</select>							
+						</div>
+					</div>
+			    </div>		
+				
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="endereco">Endereço</label> <input type="text"
+								required="required" class="form-control border-input"
+								ng-model="vendedor.endereco" placeholder="Endereço">
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="bairro">Bairro</label> <input type="text"
+								   class="form-control border-input"
+								ng-model="vendedor.bairro" placeholder="Bairro">
+						</div>
+					</div>
+				</div>			
+				<div class="row">		
+					<div class="col-md-3">
+						<div class="form-group"> 
+						   <label>Estado</label> 
+							<select ng-model="vendedor.estados.id"
+							 id="selectEstados"
+							  class="form-control" onchange="javascript:carregarCidadesChrome(this);"> 
+							  <option value="">Selecione</option> 
+							  <option
+							  	ng-repeat="est in dataEstados"  
+							  	ng-click="carregarCidades(est)"
+							  	value="{{est.id}}">{{est.sigla}}
+							  </option>
+							</select>	
+						</div>
+					</div>					
+					<div class="col-md-6">
+						<div class="form-group"> 
+						   <label>Cidades</label> 
+							<select id="selectCidades" ng-model="vendedor.cidades.id" 
+							class="form-control"> 
+							<option value="">Selecione</option>
+							  <option
+								  ng-repeat="cid in cidades"
+								  value="{{cid.id}}">{{cid.nome}}</option>
+							</select>	
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label for="cep">CEP</label> <input type="text"
+								   class="form-control border-input" id="cep"
+								ng-model="vendedor.cep" placeholder="CEP">
+						</div>
+					</div>
+					
+				</div>
+
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Tel. Fixo</label> <input type="text" id="telefone_fixo"
+								ng-model="vendedor.telefone_fixo" class="form-control border-input"
+								placeholder="Telefone Fixo">
+						</div>
+					</div>
+					
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Tel. Celular</label> <input type="text" id="telefone_celular"
+								ng-model="vendedor.telefone_celular" class="form-control border-input"
+								placeholder="Telefone Celular" required="required">
+						</div>
+					</div>
+					
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>E-mail</label> <input type="text" ng-model="vendedor.email"
+								class="form-control border-input" placeholder="E-mail">
+						</div>
+					</div>
+				</div> 
+					
+					<!--
+					<div class="col-md-1">
+						<div class="form-group">
+							<label>Ativo</label> 
+							<input type="checkbox" class="form-control" ng-model="cliente.ativo">						
+						</div>
+					</div>  -->
+				
+				<!--
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Banco de Dados</label> 
+							<input type="radio" class="form-control" name="interesse" ng-model="cliente.interesse" value="banco">						
+						</div>
+					</div>
+					
+					
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Programação</label> 
+							<input type="radio" class="form-control" name="interesse" ng-model="cliente.interesse" value="programacao" ng-checked="true">						
+						</div>
+					</div>
+					
+					
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Análise</label> 
+							<input type="radio" class="form-control" name="interesse" ng-model="cliente.interesse" value="analise">						
+						</div>
+					</div>
+				</div>
+				-->	
+				
+				
+				<button type="submit" class="btn btn-info btn-fill btn-wd">Cadastrar</button>
+				<button type="button" class="btn btn-info btn-fill btn-wd"
+					onclick="document.getElementById('formVendedor').reset();">Limpar</button>
+			</form>
+		</div>
+	</div>
+ <script type="text/javascript">
+    $('#cep').mask('99999-999');
+ 	$('#telefone_fixo').mask('(99) 9999-9999');
+ 	$('#telefone_celular').mask('(99) 99999-9999');
+ 	$('#cpf').mask('999.999.999-99');
+ 	$('#rg').mask('99.99.999');
+ </script>	
+</html>

@@ -16,13 +16,21 @@ public class ItemPedido {
 	private Long id;
 
 	@ManyToOne
-	@ForeignKey(name = "livro_fk")
-	private Livro livro;
+	@ForeignKey(name = "produto_fk")
+	private Produto produto;
 
 	@ManyToOne
 	@ForeignKey(name = "pedido_fk")
 	private Pedido pedido;
-
+	
+	private Long estoqueprodutoid;
+	
+	/*
+	@ManyToOne
+	@ForeignKey(name = "estoqueproduto_fk")
+	private EstoqueProduto estoqueproduto;
+    */
+	
 	private Long quantidade;
 
 	public Long getId() {
@@ -32,15 +40,25 @@ public class ItemPedido {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public Livro getLivro() {
-		return livro;
+	
+	public Produto getProduto() {
+		return produto;
 	}
 
-	public void setLivro(Livro livro) {
-		this.livro = livro;
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
+	
+	/*
+	public EstoqueProduto getEstoqueProduto() {
+		return estoqueproduto;
 	}
 
+	public void setEstoqueProduto(Produto produto) {
+		this.estoqueproduto = estoqueproduto;
+	}
+    */
+	
 	public Pedido getPedido() {
 		return pedido;
 	}
@@ -55,6 +73,14 @@ public class ItemPedido {
 
 	public void setQuantidade(Long quantidade) {
 		this.quantidade = quantidade;
+	}
+	
+	public Long getEstoqueprodutoid() {
+		return estoqueprodutoid;
+	}
+
+	public void setEstoqueprodutoid(Long estoqueprodutoid) {
+		this.estoqueprodutoid = estoqueprodutoid;
 	}
 
 	@Override

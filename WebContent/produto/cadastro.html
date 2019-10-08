@@ -1,0 +1,157 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<h1>Cadastro de Produtos</h1>
+<a href="#produtolist"> Lista de Produtos <img alt="Novo"
+	src="resources/img/list-icon.png" border="0">
+</a>
+
+<br />
+<br />
+
+<div class="col-lg-9 col-md-8"  ng-init="listarFornecedores(); listarMarcas(); listarCategorias();
+                                         listarTamanhos();">
+	<div class="card">
+		<div class="content">
+			<form id="formProduto" ng-submit="salvarProduto();">
+				<div class="row">
+				
+					<div class="col-md-3">
+						<div class="form-group">
+							<img alt="Foto de Capa" id="imagemProduto" src=""  style="width: 118px;height: 140px;" border="0">
+							<input type="file"  id="file"  onchange="javascript:visualizarImg();">
+						</div>
+					</div>
+				
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Id</label> <input type="text" ng-model="produto.id"
+								class="form-control border-input" disabled />
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>Modelo</label> <input type="text" ng-model="produto.modelo"
+								class="form-control border-input" placeholder="Modelo"
+								required="required">
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>Descrição</label> <input type="text" ng-model="produto.descricao"
+								class="form-control border-input" placeholder="Descrição"
+								required="required">
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>Cor(es)</label> <input type="text" ng-model="produto.cores"
+								class="form-control border-input" placeholder="Cores"
+								required="required">
+						</div>
+					</div>
+				</div>					
+				
+				<div class="row">			
+				    <div class="col-md-6">
+						<div class="form-group"> 
+						   <label>Marca</label> 
+							<select ng-model="produto.marca.id"
+							 id="selectMarca"
+							  class="form-control"> 
+							  <option value="">Selecione</option> 
+							  <option
+							  	ng-repeat="marc in marcasList"  
+							  	value="{{marc.id}}">{{marc.nome}}
+							  </option>
+							</select>	
+						</div>
+				     </div>		
+				
+					<div class="col-md-6">
+						<div class="form-group"> 
+						   <label>Fornecedor</label> 
+							<select ng-model="produto.fornecedor.id"
+							 id="selectFornecedor"
+							  class="form-control"> 
+							  <option value="">Selecione</option> 
+							  <option
+							  	ng-repeat="forn in fornecedoresList"  
+							  	value="{{forn.id}}">{{forn.nomeFantasia}}
+							  </option>
+							</select>	
+						</div>
+					</div>	
+									
+				</div>	
+				
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Preço</label> <input  id="valor"
+								ng-model="produto.valor" class="form-control border-input"
+								placeholder="Preço" required="required">
+						</div>
+					</div>		
+					
+					<div class="col-md-6">
+						<div class="form-group"> 
+						   <label>Categoria</label> 
+							<select ng-model="produto.categoria.id"
+							 id="selectCategoria"
+							  class="form-control"> 
+							  <option value="">Selecione</option> 
+							  <option
+							  	ng-repeat="cat in categoriasList"  
+							  	value="{{cat.id}}">{{cat.nome}}
+							  </option>
+							</select>	
+						</div>
+					</div>		
+							
+				</div>		
+				<!--
+				<div class="row">
+				     <div class="col-md-2">
+						<div class="form-group"> 
+						   <label>Tamanho(s)</label> 
+							<select ng-model="produto.tamanho.id"
+							 id="selectTamanho"
+							  class="form-control"> 
+							  <option value="">Selecione</option> 
+							  <option
+							  	ng-repeat="tam in tamanhosList"  
+							  	value="{{tam.id}}">{{tam.numero}}
+							  </option>
+							</select>	
+						</div>
+					</div>		
+				</div>	-->
+				
+				<button type="submit" class="btn btn-info btn-fill btn-wd">Cadastrar</button>
+				<button type="submit" class="btn btn-info btn-fill btn-wd"
+					ng-click="$scope.cliente={}">Limpar</button>
+			</form>
+		</div>
+	</div>
+	<script type="text/javascript">
+		
+		
+		$("#valor").maskMoney({
+			prefix : 'R$ ',
+			thousands : '.',
+			decimal : ',',
+			affixesStay : true
+		});
+	</script>
+</html>

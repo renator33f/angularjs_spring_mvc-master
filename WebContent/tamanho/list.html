@@ -2,7 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
-<h1>Lista de Tamanhos Cadastrados</h1>
+<h1>Lista de Tamanhos</h1>
 
 
 <a href="#tamanho/cadastro">Nova
@@ -27,7 +27,7 @@
 			<tbody>
 				<tr ng-repeat="tamanho in data | filter:filtro"> 
 					<td>{{tamanho.id}}</td>
-					<td>{{tamanho.tamanhope}}</td>
+					<td>{{tamanho.numero}}</td>
 					<td> <a href ng-click="removerTamanho(tamanho.id);">Excluir
 					 <img alt="Remover" src="resources/img/delete-icon.png" border="0">
 					</a></td>

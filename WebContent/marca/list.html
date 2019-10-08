@@ -1,0 +1,47 @@
+<html ng-app="loja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<h1>Lista de Marcas</h1>
+
+
+<a href="#marca/cadastro">Nova
+<img alt="Novo" src="resources/img/add-icon.png" border="0">
+</a>
+
+<br/>
+<br/>
+<label>Filtrar Marca<input class="form-control" type="text" ng-model="filtro"></label><br>
+<br/>
+
+<div ng-controller="marcaController" ng-init="listarMarcas(1)">
+
+	<div class="content table-responsive table-full-width">
+		<table class="table table-hover">
+			<thead>
+				<th>ID</th>
+				<th>Marca</th> 
+				<th>Excluir</th>
+				<th>Editar</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="marca in data | filter:filtro"> 
+					<td>{{marca.id}}</td>
+					<td>{{marca.nome}}</td>
+					<td> <a href ng-click="removerMarca(marca.id);">Excluir
+					 <img alt="Remover" src="resources/img/delete-icon.png" border="0">
+					</a></td>
+					<td> <a href ng-click="editarMarca(marca.id);">Editar
+					 <img alt="Editar" src="resources/img/edit-icon.png" border="0">
+					</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="text-center" ng-hide="ocultarNavegacao">
+		   <button type="button" class="btn btn-info btn-fill btn-wd" ng-click="anterior();">Anterior</button>
+		   <button type="button" class="btn btn-info btn-fill btn-wd" ng-click="proximo();">Próximo</button>
+		</div>   
+	</div>
+
+</div>
+</html>

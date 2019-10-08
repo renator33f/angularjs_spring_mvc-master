@@ -1,0 +1,51 @@
+<html ng-app="loja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<h1>Consulta Estoque</h1>
+
+
+<a href="#estoqueproduto/cadastro">Estoque Produto (Novo)
+<img alt="Entrada de Produto" src="resources/img/add-icon.png" border="0">
+</a>
+
+<br/>
+<br/>
+<label>Filtrar Produto<input class="form-control" type="text" ng-model="filtro"></label><br>
+<br/>
+
+<div ng-controller="estoqueProdutoController" ng-init="listarEstoqueProdutos(1)">
+
+	<div class="content table-responsive table-full-width">
+		<table class="table table-hover">
+			<thead>
+				<th>ID</th>
+				<th>Produto</th>
+				<th>Descrição</th>
+				<th>Quantidade</th> 
+				<th>Excluir</th>
+				<th>Atualizar</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="estoqueproduto in data | filter:filtro"> 
+					<td>{{estoqueproduto.id}}</td>
+					<td>{{estoqueproduto.produto.id}}</td>
+					<td>{{estoqueproduto.produto.modelo}}</td>
+					<td>{{estoqueproduto.quantidade}}</td>
+					<td> <a href ng-click="removerEstoqueProduto(estoqueproduto.id);">Excluir
+					 <img alt="Remover" src="resources/img/delete-icon.png" border="0">
+					</a></td>
+					<td> <a href ng-click="editarEstoqueProduto(estoqueproduto.id);">Atualizar
+					 <img alt="Editar" src="resources/img/edit-icon.png" border="0">
+					</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="text-center" ng-hide="ocultarNavegacao">
+		   <button type="button" class="btn btn-info btn-fill btn-wd" ng-click="anterior();">Anterior</button>
+		   <button type="button" class="btn btn-info btn-fill btn-wd" ng-click="proximo();">Próximo</button>
+		</div>   
+	</div>
+
+</div>
+</html>

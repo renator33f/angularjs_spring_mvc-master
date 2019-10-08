@@ -127,7 +127,7 @@ public abstract class DaoImplementacao<T> implements DaoInterface<T> {
 		criteria.add(Restrictions.in("id", longs));
 		return criteria.list();
 	}
-	
+		
 	
 	/**
 	 * Retorna a lista de objetos de acordo com a pagina offset

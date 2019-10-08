@@ -39,8 +39,8 @@ public class TamanhoController extends DaoImplementacao<Tamanho> implements
      public ResponseEntity salvar (@RequestBody String jsonTamanho) throws Exception {
     	 Tamanho tamanho = new Gson().fromJson(jsonTamanho, Tamanho.class);
 
-         if (tamanho != null && tamanho.getTamanhope() == null){
-         tamanho.setTamanhope("");
+         if (tamanho != null && tamanho.getNumero() == null){
+         tamanho.setNumero("");
          }
 
         super.salvarOuAtualizar(tamanho);
@@ -58,6 +58,13 @@ public class TamanhoController extends DaoImplementacao<Tamanho> implements
      public byte[] listar(@PathVariable("numeroPagina") String numeroPagina) throws Exception {
         return new Gson().toJson(super.consultaPaginada(numeroPagina)).getBytes("UTF-8");
      }
+     
+     @RequestMapping(value = "listartodos", method = RequestMethod.GET, headers = "Accept=application/json")
+ 	 @ResponseBody
+ 	 public String listartodos()
+ 			throws Exception {
+ 		return new Gson().toJson(super.lista());
+ 	 }
 
      @RequestMapping(value="totalPagina", method=RequestMethod.GET, headers = "Accept=application/json") 
      @ResponseBody

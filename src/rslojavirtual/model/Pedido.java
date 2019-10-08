@@ -23,8 +23,12 @@ public class Pedido {
 	@ManyToOne
 	@ForeignKey(name = "cliente_fk")
 	private Cliente cliente;
-	private String valorTotal;
 	
+	@ManyToOne
+	@ForeignKey(name = "vendedor_fk")
+	private Vendedor vendedor;
+	
+	private String valorTotal;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
@@ -52,6 +56,14 @@ public class Pedido {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+	
+	public Vendedor getVendedor() {
+		return vendedor;
+	}
+
+	public void setVendedor(Vendedor vendedor) {
+		this.vendedor = vendedor;
 	}
 
 	public String getValorTotal() {

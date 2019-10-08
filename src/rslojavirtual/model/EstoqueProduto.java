@@ -1,5 +1,7 @@
 package rslojavirtual.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,29 +10,57 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import rslojavirtual.model.Produto;
+
 import org.hibernate.annotations.ForeignKey;
 
+/**
+ * Modelo que representa a tabela de entrada de produtos no estoque do banco
+ * @author renatosalinas
+ *
+ */
 @Entity
-public class Sapato {
-	
+public class EstoqueProduto implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+
+	@ManyToOne
+	@ForeignKey(name = "produto_fk")
+	private Produto produto;
 	
-	@Column(columnDefinition = "text")
-	private String foto;
+	private Long quantidade;
 	
-	private String modelo;
 	
-	private String descricao;
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
+	
+	public Long getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Long quantidade) {
+		this.quantidade = quantidade;
+	}	
 	
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@ForeignKey(name = "fornecedor_fk")
-	private Fornecedor fornecedor;
-
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -47,7 +77,7 @@ public class Sapato {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Sapato other = (Sapato) obj;
+		EstoqueProduto other = (EstoqueProduto) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -55,6 +85,5 @@ public class Sapato {
 			return false;
 		return true;
 	}
-
 
 }

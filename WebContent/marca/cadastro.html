@@ -2,8 +2,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
-<h1>Cadastro de Cor(es)</h1>
-<a href="#corlist"> Lista de Cores <img alt="Novo"
+<h1>Cadastro de Marcas</h1>
+<a href="#marcalist"> Lista de Marcas <img alt="Novo"
 	src="resources/img/list-icon.png" border="0">
 </a>
 
@@ -12,19 +12,20 @@
 
 	<div class="card">
 		<div class="content">
-			<form id="formCor" ng-submit="salvarCor();">
+			<form id="formMarca" ng-submit="salvarMarca();">
 				<div class="row">
-				
+				    <!--
 				    <div class="col-md-3">
 						<div class="form-group">
 							<img alt="Foto" id="imagemCor" src=""  style="width: 118px;height: 140px;" border="0">
 							<input type="file"  id="file"  onchange="javascript:visualizarImg();">
 						</div>
 					</div>
-				
+		             -->
+		             		
 					<div class="col-md-2">
 						<div class="form-group">
-							<label>Id</label> <input type="text" ng-model="cor.id"
+							<label>Id</label> <input type="text" ng-model="marca.id" id="codMarca"
 								class="form-control border-input" disabled />
 						</div>
 					</div>
@@ -33,23 +34,24 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label>Nome</label> <input type="text" ng-model="cor.nome"
-								class="form-control border-input" placeholder="Nome"
+							<label>Marca</label> <input type="text" ng-model="marca.nome"
+								class="form-control border-input" placeholder="Nome da Marca" id="Nome"
 								required="required">
 						</div>
 					</div>
-					
+					<!--
 					<div class="col-md-1">
 						<div class="form-group">
 							<label>Ativo</label> 
 							<input type="checkbox" class="form-control" ng-model="cor.ativo">						
 						</div>
-					</div>
+					</div> -->
 				</div>				
-				
+				 
+				 
 				<button type="submit" class="btn btn-info btn-fill btn-wd">Cadastrar</button>
 				<button type="button" class="btn btn-info btn-fill btn-wd"
-					onclick="document.getElementById('formCor').reset();">Limpar</button>
+					onclick="document.getElementById('formMarca').reset();">Limpar</button>
 			</form>
 		</div>
 	</div>

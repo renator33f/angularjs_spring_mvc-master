@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rel_pedido_cad_itens" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ad41415b-c05e-49e5-bda5-c048563bb767">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="pedido" class="rslojavirtual.model.Pedido">
+		<fieldDescription><![CDATA[pedido]]></fieldDescription>
+	</field>
+	<field name="produto" class="rslojavirtual.model.Produto">
+		<fieldDescription><![CDATA[produto]]></fieldDescription>
+	</field>
+	<field name="quantidade" class="java.lang.Long">
+		<fieldDescription><![CDATA[quantidade]]></fieldDescription>
+	</field>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="57" height="20" uuid="f7275ae0-f0dd-4232-abe3-8a2693d01ac0"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="57" y="0" width="268" height="20" uuid="019025e1-1c7e-4246-a634-2ec836d61446"/>
+				<textFieldExpression><![CDATA[$F{produto}.getModelo()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="325" y="0" width="94" height="20" uuid="6d7b6ac0-2638-407f-a659-9201dc0ebadc"/>
+				<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="0" width="136" height="20" uuid="8fdf6764-eb7a-43a8-9f16-904880efd2d9"/>
+				<textFieldExpression><![CDATA[$F{produto}.getValor()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

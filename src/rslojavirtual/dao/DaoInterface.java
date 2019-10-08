@@ -28,6 +28,8 @@ public interface DaoInterface<T> {
 	
 	List<T> lista(String ids) throws Exception;
 	
+	// List<T> lista(Long ids) throws Exception; /* AQUI */
+	
 	List<T> lista(String campoBanco, String valorCampo) throws Exception;
 	
 	 List<T> lista(String campoBanco, Long valorCampo) throws Exception;

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rel_pedido_cad" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14b0957a-cfe1-4dda-b940-6e41a2b4e272">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="26"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\workspace\\angularjs_spring_mvc-master\\angularjs_spring_mvc-master\\src\\relatorios\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="itens" class="java.util.ArrayList">
+		<fieldDescription><![CDATA[itens]]></fieldDescription>
+	</field>
+	<field name="pedido" class="rslojavirtual.model.Pedido">
+		<fieldDescription><![CDATA[pedido]]></fieldDescription>
+	</field>
+	<title>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="57" y="34" width="100" height="20" uuid="6e732155-585e-4bd2-98d0-550095c4f43f"/>
+				<textFieldExpression><![CDATA[$F{pedido}.getId()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="34" width="57" height="20" uuid="36e33718-02c6-4d66-a39b-f2d40fcf63c4"/>
+				<text><![CDATA[Pedido Nº:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="172" y="34" width="43" height="20" uuid="9966f242-9c70-44c8-87db-780f1b626156"/>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="215" y="34" width="66" height="20" uuid="42b3bd05-416d-4f1a-9a4e-a3493bb1ebb3"/>
+				<textFieldExpression><![CDATA[$F{pedido}.getCliente().getId()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="294" y="34" width="261" height="20" uuid="3e39ed36-be23-4436-b32b-8b2196e84c6d"/>
+				<textFieldExpression><![CDATA[$F{pedido}.getCliente().getNome()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="281" y="34" width="13" height="20" uuid="842304ba-c2a1-4e00-af83-daa6d557510f"/>
+				<text><![CDATA[ - ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="67" width="57" height="20" uuid="9b557048-0ed8-4c58-b91c-22091db714b8"/>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="57" y="67" width="100" height="20" uuid="695dc89f-58a0-4d16-8c10-17dbdee1cd75"/>
+				<textFieldExpression><![CDATA[$F{pedido}.getValorTotal()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="172" y="67" width="60" height="20" uuid="b9df138b-5fef-4a9f-b0a8-308bdbbaf3c0"/>
+				<text><![CDATA[Data \ Hora:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="232" y="67" width="100" height="20" uuid="57db82c4-0345-497a-8632-6ac78c6b1a60"/>
+				<textFieldExpression><![CDATA[$F{pedido}.getData()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="215" y="0" width="122" height="20" uuid="f382d850-cf7c-456e-bf0b-8a8eb489f6d9"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Pedido Realizado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="87" width="555" height="16" uuid="128053b6-d276-4c26-92f3-1dabd76e6bb0"/>
+				<text><![CDATA[______________________________________________________________________________________________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="103" width="57" height="20" uuid="dd078ce4-8caa-4102-8ae5-7f782bc970fd"/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="57" y="103" width="268" height="20" uuid="5f1fc018-aa01-48fe-849f-73e37496e277"/>
+				<text><![CDATA[Produto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="103" width="94" height="20" uuid="4ef64341-e9fd-45de-8046-ff90c683ab50"/>
+				<text><![CDATA[Quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="419" y="103" width="136" height="20" uuid="0686bad5-0dd1-432a-b1d6-a111ab8d74e1"/>
+				<text><![CDATA[Valor Unit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="122" height="20" uuid="f93a7ff5-32e1-42e4-b52e-de1eb2789f07"/>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[RSLojaVirtual]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="384" y="67" width="171" height="20" uuid="87804dca-a138-4b93-9700-f87b1492a434"/>
+				<textFieldExpression><![CDATA[$F{pedido}.getVendedor().getNome()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="332" y="67" width="52" height="20" uuid="e189cd37-9042-48dd-9063-64c5d04102fd"/>
+				<text><![CDATA[Vendedor:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="273" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="21" uuid="ac254b49-4bd4-4204-9c67-3102dcd3563b"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{itens})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "rel_pedido_cad_itens.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

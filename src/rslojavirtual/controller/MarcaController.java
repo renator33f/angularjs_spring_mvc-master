@@ -58,6 +58,13 @@ DaoInterface<Marca> {
      public byte[] listar(@PathVariable("numeroPagina") String numeroPagina) throws Exception {
         return new Gson().toJson(super.consultaPaginada(numeroPagina)).getBytes("UTF-8");
      }
+     
+     @RequestMapping(value = "listartodos", method = RequestMethod.GET, headers = "Accept=application/json")
+ 	 @ResponseBody
+ 	 public String listartodos()
+ 			throws Exception {
+ 		return new Gson().toJson(super.lista());
+ 	 }
 
      @RequestMapping(value="totalPagina", method=RequestMethod.GET, headers = "Accept=application/json") 
      @ResponseBody
@@ -114,4 +121,3 @@ DaoInterface<Marca> {
      }
 
 }
-//AQUI CONTINUA

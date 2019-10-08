@@ -1,0 +1,57 @@
+<html ng-app="loja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<h1>Lista de Vendedores</h1>
+
+
+<a href="#vendedor/cadastro">Novo
+<img alt="Novo" src="resources/img/add-icon.png" border="0">
+</a>
+
+<br/>
+<br/>
+<label>Filtrar Vendedor<input class="form-control" type="text" ng-model="filtro"></label><br>
+<br/>
+
+<div ng-controller="vendedorController" ng-init="listarVendedores(1)">
+
+	<div class="content table-responsive table-full-width">
+		<table class="table table-hover">
+			<thead>
+				<th>ID</th>
+				<th>Foto</th>
+				<th>Nome</th>
+				<th>CPF</th>
+				<th>Endereço</th>
+				<th>Tel. Fixo</th>
+				<th>Tel. Celular</th> 
+				<th>Excluir</th>
+				<th>Editar</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="vendedor in data | filter:filtro"> 
+					<td>{{vendedor.id}}</td>
+					<td><img src="{{vendedor.foto}}" style="width: 40px; height: 43px"/></td>
+					<td>{{vendedor.nome}}</td>
+					<td>{{vendedor.cpf}}</td>
+					<td>{{vendedor.endereco}}</td>
+					<td>{{vendedor.telefone_fixo}}</td>
+					<td>{{vendedor.telefone_celular}}</td>
+					<td> <a href ng-click="removerVendedor(vendedor.id);">Excluir
+					 <img alt="Remover" src="resources/img/delete-icon.png" border="0">
+					</a></td>
+					<td> <a href ng-click="editarVendedor(vendedor.id);">Editar
+					 <img alt="Editar" src="resources/img/edit-icon.png" border="0">
+					</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="text-center" ng-hide="ocultarNavegacao">
+		   <button type="button" class="btn btn-info btn-fill btn-wd" ng-click="anterior();">Anterior</button>
+		   <button type="button" class="btn btn-info btn-fill btn-wd" ng-click="proximo();">Próximo</button>
+		</div>   
+	</div>
+
+</div>
+</html>
