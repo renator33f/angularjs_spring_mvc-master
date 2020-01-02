@@ -1,0 +1,51 @@
+<html ng-app="loja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<h1>Consulta Devolução</h1>
+
+
+<a href="#devolucao/cadastro">Realizar Devolução (Novo)
+<img alt="Realizar Devolução" src="resources/img/add-icon.png" border="0">
+</a>
+
+<br/>
+<br/>
+<label>Filtrar Produto<input class="form-control" type="text" ng-model="filtro"></label><br>
+<br/>
+
+<div ng-controller="devolucaoController" ng-init="listarDevolucaoProdutos(1)">
+
+	<div class="content table-responsive table-full-width">
+		<table class="table table-hover">
+			<thead>
+				<th>ID</th>
+				<th>Pedido</th>
+				<th>Produto</th>
+				<th>Qtde(Devolução)</th> 
+				<th>Excluir</th>
+				<th>Atualizar</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="devolucao in data | filter:filtro"> 
+					<td>{{devolucao.id}}</td>
+					<td>{{devolucao.pedido.id}}</td>
+					<td>{{devolucao.estoqueproduto.id}}</td>
+					<td>{{devolucao.quantidade}}</td>
+					<td> <a href ng-click="removerDevolucao(devolucao.id);">Excluir
+					 <img alt="Remover" src="resources/img/delete-icon.png" border="0">
+					</a></td>
+					<td> <a href ng-click="editarDevolucao(devolucao.id);">Atualizar
+					 <img alt="Editar" src="resources/img/edit-icon.png" border="0">
+					</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="text-center" ng-hide="ocultarNavegacao">
+		   <button type="button" class="btn btn-info btn-fill btn-wd" ng-click="anterior();">Anterior</button>
+		   <button type="button" class="btn btn-info btn-fill btn-wd" ng-click="proximo();">Próximo</button>
+		</div>   
+	</div>
+
+</div>
+</html>

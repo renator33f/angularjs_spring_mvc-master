@@ -1,38 +1,49 @@
 package rslojavirtual.model;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import rslojavirtual.model.EstoqueProduto;
+
 import org.hibernate.annotations.ForeignKey;
 
+/**
+ * Modelo que representa a tabela de Devolução de produtos(Pedido) no estoque do banco
+ * @author renatosalinas
+ *
+ */
 @Entity
-public class ItemPedido {
+public class Devolucao implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
-	@ManyToOne
-	@ForeignKey(name = "produto_fk")
-	private Produto produto;
-
+	
 	@ManyToOne
 	@ForeignKey(name = "pedido_fk")
 	private Pedido pedido;
 	
-	// private Long estoqueprodutoid;
-	
-	
+	@ManyToOne
+	@ForeignKey(name = "itempedido_fk")
+	private ItemPedido itempedido;
+
 	@ManyToOne
 	@ForeignKey(name = "estoqueproduto_fk")
 	private EstoqueProduto estoqueproduto;
-    
 	
 	private Long quantidade;
-
+	
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -41,14 +52,21 @@ public class ItemPedido {
 		this.id = id;
 	}
 	
-	public Produto getProduto() {
-		return produto;
+	public Pedido getPedido() {
+		return pedido;
 	}
 
-	public void setProduto(Produto produto) {
-		this.produto = produto;
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
 	}
 	
+	public ItemPedido getItemPedido() {
+		return itempedido;
+	}
+
+	public void setItemPedido(ItemPedido itempedido) {
+		this.itempedido = itempedido;
+	}
 	
 	public EstoqueProduto getEstoqueProduto() {
 		return estoqueproduto;
@@ -57,32 +75,15 @@ public class ItemPedido {
 	public void setEstoqueProduto(EstoqueProduto estoqueproduto) {
 		this.estoqueproduto = estoqueproduto;
 	}
-    
 	
-	public Pedido getPedido() {
-		return pedido;
-	}
-
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
-	}
-
 	public Long getQuantidade() {
 		return quantidade;
 	}
 
 	public void setQuantidade(Long quantidade) {
 		this.quantidade = quantidade;
-	}
+	}	
 	
-	/*
-	public Long getEstoqueprodutoid() {
-		return estoqueprodutoid;
-	}
-
-	public void setEstoqueprodutoid(Long estoqueprodutoid) {
-		this.estoqueprodutoid = estoqueprodutoid;
-	} */
 
 	@Override
 	public int hashCode() {
@@ -100,7 +101,7 @@ public class ItemPedido {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ItemPedido other = (ItemPedido) obj;
+		Devolucao other = (Devolucao) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -110,3 +111,4 @@ public class ItemPedido {
 	}
 
 }
+

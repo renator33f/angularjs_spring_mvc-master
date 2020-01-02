@@ -10,6 +10,21 @@ app.controller("lojaController", function($scope, $http, $location, $routeParams
 		});
 	};
 	
+	$scope.buscarPedidoCodigo = function (codPedido) {
+		$http.get("itempedido/buscarcodigo/" + $scope.filtroPedido).success(function(response) {
+			$scope.pedidosData = response;
+		}).error(function(response) {
+			erro("Error: " + response);
+		});
+	};		
+	
+	$scope.buscarNomePedido = function () {
+		$http.get("pedido/buscarnomepedido/" + $scope.filtroPedido).success(function(response) {
+			$scope.pedidosPesquisa = response;
+		}).error(function(response) {
+			erro("Error: " + response);
+		});
+	};
 	
 	$scope.removerPedido = function (codPedido) {
 		$http.delete("pedido/deletar/"+codPedido).success(function(response) {
@@ -59,6 +74,7 @@ app.controller("lojaController", function($scope, $http, $location, $routeParams
 			erro("Error: " + response);
 		});
 	};
+	
 	
 	$scope.adicionarClienteCarrinho = function (cliente) {
 		$scope.clientesPesquisa.cliente = cliente;

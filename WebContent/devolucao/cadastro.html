@@ -1,0 +1,76 @@
+<html ng-app="loja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<h1>Devolução Produto (Novo)</h1>
+<a href="#devolucaolist"> Consulta Devolução <img alt="Consulta Devolução"
+	src="resources/img/list-icon.png" border="0">
+</a>
+
+<br />
+<br />
+<!-- <div ng-controller="devolucaoController"> -->
+
+<div ng-controller="lojaController">
+
+	<div class="card">
+		<div class="content">
+			<form id="formDevolucao" ng-submit="salvarDevolucao();">
+				<div class="row"> 		
+					<div class="col-md-1">
+						<div class="form-group">
+							<label>Id</label> <input type="text" ng-model="devolucao.id" id="codDevolucao"
+								class="form-control border-input" disabled />
+						</div>
+					</div>					
+				</div>		
+				
+			      
+				    <label>Pesquisar Pedido <input class="form-control" type="text" ng-model="filtroPedido"></label>
+                    <button type="button" class="btn btn-info btn-fill btn-wd" ng-click="buscarPedidoCodigo();">Buscar</button>
+                    <table class="table table-hover">
+                       <tr ng-repeat="itempedido in pedidosData">
+  	                      <td>{{itempedido.pedido.id}}</td>
+  	                      <td>{{itempedido.produto.id}}</td>
+  	                      <td>{{itempedido.quantidade}}</td>  	                   
+  	                     <!--  <td>{{itempedido.pedido.id}}</td> -->
+  	                      <td>
+  	                         <button type="button" class="btn btn-info btn-fill btn-wd" ng-click="adicionarProdutoEstoque(produto);">Adicionar</button>
+  	                         <!--  
+  	                         <a href ng-click="adicionarProdutoEstoque(produto);">Adicionar
+					         <img alt="Adicionar Produto" title="Adicionar Produto" 
+					              src="resources/img/add-icon.png" border="0">
+					         </a> -->
+              		      </td>
+                       </tr>
+                    </table>
+                    <br/>
+                    <label>Produto</label>
+                    <input class="form-control" style="max-width: 100px;" ng-model="produtosPesquisa.produto.id" value="{{produtosPesquisa.produto.id}}" readonly="readonly" type="text" id="codProduto"/>
+                    <br>
+                    <input class="form-control" readonly="readonly" ng-model="produtosPesquisa.produto.modelo" value="{{produtosPesquisa.produto.modelo}}" type="text" id="Modelo"/>
+                    <br>
+                    <br/>
+                    
+                    
+                <div class="row"> 		
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Quantidade</label> <input type="text" ng-model="estoqueproduto.quantidade" id="quantidade"
+								class="form-control border-input" />
+						</div>
+					</div>					
+				</div>		
+				  
+				  
+				
+				 
+				 
+				<button type="submit" class="btn btn-info btn-fill btn-wd">Cadastrar</button>
+				<button type="button" class="btn btn-info btn-fill btn-wd"
+					onclick="document.getElementById('formEstoqueProduto').reset();">Limpar</button>
+			</form>
+		</div>
+	</div>
+<!-- </div> -->	
+</html>

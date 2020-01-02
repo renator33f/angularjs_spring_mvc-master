@@ -133,6 +133,22 @@ app.config(function($routeProvider) {
 				templateUrl : "estoqueproduto/cadastro.html"
 			})// novo
 			
+			//--------------Devolução---------------------
+			$routeProvider.when("/devolucaolist", {
+				controller : "devolucaoController",
+				templateUrl : "devolucao/list.html"
+			})// listar
+			
+			.when("/devolucaoedit/:id", {
+				controller : "devolucaoController",
+				templateUrl : "devolucao/alterar.html"
+			})// editar
+			
+			.when("/devolucao/cadastro", {
+				controller : "devolucaoController",
+				templateUrl : "devolucao/cadastro.html"
+			})// novo			
+			
 			//----------------LOJA---------------
 			.when("/loja/online", {
 				controller : "lojaController",
@@ -986,6 +1002,142 @@ app.controller('estoqueProdutoController', function($scope, $http, $location, $r
 	};
 	
 });
+
+
+
+
+
+//configurações do controller de Devolução do Produto
+app.controller('devolucaoController', function($scope, $http, $location, $routeParams) {
+	
+	if ($routeParams.id != null && $routeParams.id != undefined
+			&& $routeParams.id != ''){// se estiver Atualizando a devolucao 
+		// entra pra editar
+		$http.get("devolucao/buscardevolucao/" + $routeParams.id).success(function(response) {
+			$scope.devolucao = response;
+			
+			document.getElementById("codDevolucao").src = $scope.devolucao.id;
+					
+		}).error(function(data, status, headers, config) {
+			erro("Error: " + status);
+		});
+		
+	}else { // nova devolucao Produto
+		$scope.devolucao = {};
+	}
+	
+	
+	$scope.editarDevolucaoProduto = function(id) {
+		$location.path('devolucaoedit/' + id);
+	};
+	
+	
+	// Responsável por salvar a Devolucao do Produto ou editar os dados
+	$scope.salvarDevolucaoProduto = function() {
+		
+		 $scope.devolucao.produto  = $scope.produtosPesquisa.produto;
+	        
+			$scope.devolucao.id = document.getElementById("quantidade").getAttribute("src");
+			
+			$http.post("devolucao/salvar", $scope.devolucao).success(function(response) {
+				$scope.devolucao = {};
+	        	// $scope.produtosPesquisa = {};
+				document.getElementById("quantidade").src = '';
+				sucesso("Gravado com sucesso!");
+			}).error(function(response) {
+				erro("Error: " + response);
+			});
+  
+      };
+      
+      
+    // Responsável por alterar a quantidade de devolucao do produto
+  	$scope.alterarDevolucaoProduto = function() {
+  				$scope.devolucao.devolucao = document.getElementById("quantidade").getAttribute("src");
+  				
+  				$http.post("devolucao/salvar", $scope.devolucao).success(function(response) {
+  					$scope.devolucao = {};
+  					document.getElementById("quantidade").src = '';
+  					sucesso("Devolução alterada com sucesso!");
+  				}).error(function(response) {
+  					erro("Error: " + response);
+  				});
+    
+    };
+          
+          
+	// listar todos os itens das devoluções
+	$scope.listarDevolucaoProdutos = function(numeroPagina) {
+		$scope.numeroPagina = numeroPagina;
+		$http.get("devolucao/listar/" + numeroPagina).success(function(response) {
+			
+			if (response == null || response == '') {
+				$scope.ocultarNavegacao = true;
+			}else {
+				$scope.ocultarNavegacao = false;
+			}
+			
+			$scope.data = response;
+			
+			//---------Inicio total página----------
+				$http.get("devolucao/totalPagina").success(function(response) {
+					$scope.totalPagina = response;
+				}).error(function(response) {
+					erro("Error: " + response);
+				});
+			//---------Fim total página----------
+			
+		}).error(function(response) {
+			erro("Error: " + response);
+		});
+		
+	};
+	
+	$scope.proximo = function () {
+		if (new Number($scope.numeroPagina) < new Number($scope.totalPagina)) {
+		 $scope.listarDevolucoes(new Number($scope.numeroPagina + 1));
+		} 
+	};
+	
+	$scope.anterior = function () {
+		if (new Number($scope.numeroPagina) > 1) {
+		  $scope.listarDevolucoes(new Number($scope.numeroPagina - 1));
+		}
+	};
+	
+	// remover devolucao do Produto passado como parametro
+	$scope.removerDevolucao = function(codDevolucao) {
+		$http.delete("devolucao/deletar/" + codDevolucao).success(function(response) {
+			$scope.listarDevolucoes($scope.numeroPagina);
+			sucesso("Removido com sucesso!"); 
+		}).error(function(data, status, headers, config) {
+			erro("Error: " + status);
+		});
+	};
+	
+	
+	$scope.buscarDevolucaoNome = function () {
+		$http.get("devolucao/buscarnome/" + $scope.filtroDevolucao).success(function(response) {
+			$scope.produtosPesquisa = response;
+			// $scope.estoqueObjeto = response.produto;
+		}).error(function(response) {
+			erro("Error: " + response);
+		});
+	};
+	
+	
+			
+	
+    $scope.adicionarDevolucao = function (produto) {
+		   		
+		$scope.produtosPesquisa.produto = produto;
+		// $scope.estoqueAdicionado = produto;
+		// $scope.produtosPesquisa = {};
+			
+	};
+	
+});
+
 
 
 

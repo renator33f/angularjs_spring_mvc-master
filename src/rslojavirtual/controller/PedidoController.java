@@ -1,5 +1,6 @@
 package rslojavirtual.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
@@ -25,6 +26,7 @@ import rslojavirtual.model.Pedido;
 import rslojavirtual.model.PedidoBean;
 import rslojavirtual.model.EstoqueProduto; 
 import rslojavirtual.model.Produto;
+import rslojavirtual.model.Vendedor;
 
 import com.google.gson.Gson;
 
@@ -38,6 +40,9 @@ public class PedidoController extends DaoImplementacao<Pedido> implements
 
 	@Autowired
 	private ProdutoController produtoController;
+	
+	@Autowired
+	private EstoqueProdutoController estoqueprodutoController;
 
 	
 	public PedidoController(Class<Pedido> persistenceClass) {
@@ -88,6 +93,8 @@ public class PedidoController extends DaoImplementacao<Pedido> implements
 		
 		List<ItemPedido> inItemPedidos = pedidoBean.getItens();
 		
+		List<EstoqueProduto> estoques = estoqueprodutoController.lista();
+		
 		List<Produto> produtos = produtoController.lista();
 
 		for (ItemPedido itemPedido : inItemPedidos) {
@@ -102,21 +109,44 @@ public class PedidoController extends DaoImplementacao<Pedido> implements
 		    //sessao.update(jsonPedido, estoqproduto);
 			//System.out.println(itemPedido.getProduto());
 		   
+		  for (EstoqueProduto estoqueproduto: estoques){
+			  
+			  if (estoqueproduto.getProduto().getId() == itemPedido.getProduto().getId()) {
+				  
+				  itemPedido.setEstoqueProduto(estoqueproduto);
+				  estoqueproduto.setQuantidade(estoqueproduto.getQuantidade() - itemPedido.getQuantidade());
+				  
+				  
+					 JOptionPane.showMessageDialog(null, "mensagem aki 2");
+					 JOptionPane.showMessageDialog(null, itemPedido.getProduto());
+					 JOptionPane.showMessageDialog(null, estoqueproduto.getProduto());
+					 JOptionPane.showMessageDialog(null, estoqueproduto.getQuantidade());
+					 JOptionPane.showMessageDialog(null, itemPedido.getQuantidade());
+					 JOptionPane.showMessageDialog(null, estoqueproduto.getQuantidade());
+				  
+			  }
+			 
+		  }  
+			 
+			  	 
+		  
+		   
 		   for (Produto produto: produtos) {
 			   
 			   itemPedido.setProduto(produto);
-			   Produto estoqproduto = itemPedido.getProduto();
-			   estoqproduto.setQuantidade(estoqproduto.getQuantidade() - itemPedido.getQuantidade());
+			   
+			 //  EstoqueProduto estoqproduto = itemPedido.getProduto();
+			 //  estoqproduto.setQuantidade(estoqproduto.getQuantidade() - itemPedido.getQuantidade());
 			 //  sessao.update(estoqproduto);	
 			 
 			 //  inItemPedidos.add(itemPedido);
 			   itemPedidoController.salvar(itemPedido);
 			    
-			   JOptionPane.showMessageDialog(null, "mensagem aki 2");
-			   JOptionPane.showMessageDialog(null, itemPedido.getId());
-			   JOptionPane.showMessageDialog(null, estoqproduto.getId());
-			   JOptionPane.showMessageDialog(null, estoqproduto.getQuantidade());
-			   JOptionPane.showMessageDialog(null, itemPedido.getQuantidade());
+			   // JOptionPane.showMessageDialog(null, "mensagem aki 2");
+			   // JOptionPane.showMessageDialog(null, itemPedido.getProduto());
+			   // JOptionPane.showMessageDialog(null, estoqproduto.getId());
+			   // JOptionPane.showMessageDialog(null, estoqproduto.getQuantidade());
+			   // JOptionPane.showMessageDialog(null, itemPedido.getQuantidade());
 			  // JOptionPane.showMessageDialog(null, estoqproduto.getQuantidade());
 		  
 		   }
@@ -132,6 +162,48 @@ public class PedidoController extends DaoImplementacao<Pedido> implements
 	public String listar() throws Exception {
 		return new Gson().toJson(super.lista());
 	}
+	
+	
+	/**
+	 * Consulta e retorna o Pedido com o codigo  informado
+	 * @param codigoPedido
+	 * @return JSON Pedido pesquisado
+	 * @throws Exception
+	**/
+	
+	@RequestMapping(value="buscarcodigo/{codPedido}", method=RequestMethod.GET)
+	public  @ResponseBody String buscarPedido (@PathVariable("codPedido") String codPedido) throws Exception {
+		Pedido objeto = super.loadObjeto(Long.parseLong(codPedido));
+		if (objeto == null) {
+			return "{}";
+		}
+		return new Gson().toJson(objeto);
+	}
+	
+	/*
+	@RequestMapping(value="buscarcodigo/{codPedido}", method=RequestMethod.GET)
+	public  @ResponseBody byte[] buscarCodigo (@PathVariable("codPedido") String codPedido) throws Exception {
+		Pedido objeto = super.loadObjeto(Long.parseLong(codPedido));
+		if (objeto == null) {
+			return "{}".getBytes("UTF-8");
+		}
+		return new Gson().toJson(objeto).getBytes("UTF-8");
+	} */
+	
+	
+	@RequestMapping(value="buscarnomepedido/{nomePedido}", method=RequestMethod.GET)
+	public  @ResponseBody byte[] buscarNome (@PathVariable("nomePedido") String nomePedido) throws Exception {
+		List<Pedido> pedidos = new ArrayList<Pedido>();
+		// pedidos = super.listaLikeExpression("id", nomePedido);
+		pedidos = (List<Pedido>) super.loadObjeto(Long.parseLong(nomePedido));
+
+		if (pedidos == null || pedidos.isEmpty() ) {
+			return "{}".getBytes("UTF-8");
+		}
+		
+		return new Gson().toJson(pedidos).getBytes("UTF-8");
+	}
+	
 
 	@RequestMapping(value = "deletar/{codPedido}", method = RequestMethod.DELETE)
 	public @ResponseBody

@@ -115,6 +115,11 @@
 		<constructor-arg value="rslojavirtual.model.EstoqueProduto" />
 	</bean>
 	
+	<bean id="devolucaoController" name="devolucaoController"
+		class="rslojavirtual.controller.DevolucaoController">
+		<constructor-arg value="rslojavirtual.model.Devolucao" />
+	</bean>
+	
 	<bean id="fileDownloadController" name="fileDownloadController"
 		class="rslojavirtual.controller.FileDownloadController">
 	</bean>

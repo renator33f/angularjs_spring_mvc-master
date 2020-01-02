@@ -37,6 +37,7 @@
 		<mapping class="rslojavirtual.model.Categoria" />
 		<mapping class="rslojavirtual.model.Vendedor" />
 		<mapping class="rslojavirtual.model.EstoqueProduto" />
+		<mapping class="rslojavirtual.model.Devolucao" />
 		
 		
 	</session-factory>

@@ -5,10 +5,13 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import rslojavirtual.dao.DaoImplementacao;
@@ -40,7 +43,7 @@ public class ItemPedidoController extends DaoImplementacao<ItemPedido> implement
 	@RequestMapping(value="processar/{itens}")
 	public @ResponseBody String processar(@PathVariable("itens") String itens) throws Exception{
 		List<Produto> produtos = produtoController.lista(itens);
-		//List<EstoqueProduto> estoquep = estoqueProdutoController.lista(itens);
+	    List<EstoqueProduto> estoques = estoqueProdutoController.lista(itens);
 		List<ItemPedido> itemPedidos = new ArrayList<ItemPedido>();	    
 		
 		Pedido pedido = new Pedido();
@@ -52,14 +55,24 @@ public class ItemPedidoController extends DaoImplementacao<ItemPedido> implement
 		
 		/*** Tela ItensLoja - Apresenta a pagina do carrinho com os produtos selecionados ***/
 		pedido.setValorTotal("R$" + valorTotal.setScale(2, RoundingMode.HALF_DOWN).toString());
-		for (Produto produto: produtos) {			
+		for (Produto produto: produtos){			
 			ItemPedido itemPedido  = new ItemPedido();
 			itemPedido.setProduto(produto);
 			itemPedido.setPedido(pedido);
 			itemPedido.setQuantidade(1L);
-			itemPedido.setEstoqueprodutoid(produto.getId());
-			itemPedidos.add(itemPedido);
+		   // itemPedido.setEstoqueProduto();
+		    itemPedidos.add(itemPedido);  
+		
+           /*		
+            for (EstoqueProduto estoqueproduto : estoques) {
 			
+	 	         itemPedido.setEstoqueProduto(estoqueproduto);
+	 	         itemPedidos.add(itemPedido); 
+		    } */
+		}
+			
+		
+		    	
 			// for (EstoqueProduto estoqueproduto : produtos) {
 			
 			//	itemPedido.setEstoqueProduto(estoqueproduto);
@@ -82,10 +95,19 @@ public class ItemPedidoController extends DaoImplementacao<ItemPedido> implement
 			
 			
 			//estoquepp.setQuantidade(estoquepp.getQuantidade() - itemPedido.getQuantidade());
-		  
-		  }
 		
 		return new Gson().toJson(itemPedidos);
+	}
+	
+	
+	
+	@RequestMapping(value="buscarcodigo/{codPedido}", method=RequestMethod.GET)
+	public  @ResponseBody String buscarPedido (@PathVariable("codPedido") String codPedido) throws Exception {
+		ItemPedido objeto = super.loadObjeto(Long.parseLong(codPedido));
+		if (objeto == null) {
+			return "{}";
+		}
+		return new Gson().toJson(objeto);
 	}
 
 	//private EstoqueProduto Long(java.lang.Long estoqueprodutoid) {
